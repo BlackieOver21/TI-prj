@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Sierpinski Gasket Curve Construction</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="sierpinskiCanvas"></canvas>
+    <script>
+        
+        const canvas = document.getElementById('sierpinskiCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const width = canvas.width = 500;
+        const height = canvas.height = 500;
+
+            const triangleVertices = [
+            { x: width / 2, y: 100 }, // Vertex 1
+            { x: 100, y: height - 100 }, // Vertex 2
+            { x: width - 100, y: height - 100 } // Vertex 3
+        ];
+
+        ctx.fillRect(triangleVertices[0].x, triangleVertices[0].y, 2, 2);
+        ctx.fillRect(triangleVertices[1].x, triangleVertices[1].y, 2, 2);
+        ctx.fillRect(triangleVertices[2].x, triangleVertices[2].y, 2, 2);
+
+        function getRandomPointInTriangle() {
+            const u = Math.random();
+            const v = Math.random();
+            const w = 1 - u - v;
+            const point = {
+                x: u * triangleVertices[0].x + v * triangleVertices[1].x + w * triangleVertices[2].x,
+                y: u * triangleVertices[0].y + v * triangleVertices[1].y + w * triangleVertices[2].y
+            };
+            return point;
+        }
+
+        const animationSpeed = 0.5; // Adjust as needed
+        let currentPosition = getRandomPointInTriangle();
+
+        function animateRandomWalk() {
+            const randomVertexIndex = Math.floor(Math.random() * 3); // Randomly select a vertex
+            const selectedVertex = triangleVertices[randomVertexIndex];
+            currentPosition.x += (selectedVertex.x - currentPosition.x) / 2;
+            currentPosition.y += (selectedVertex.y - currentPosition.y) / 2;
+
+            ctx.fillRect(currentPosition.x, currentPosition.y, 2, 2); // Plot the current position
+
+            setTimeout(animateRandomWalk, animationSpeed);
+        }
+
+        function animate(ratio) {
+            //ctx.clearRect(0, 0, width, height);
+            const side = 300;
+            const x1 = 50;
+            const y1 = height - 50;
+            const x2 = x1 + side/4;
+            const y2 = y1 - (side/2)*(Math.sqrt(3)/2);
+            const x3 = x1 + (side/4)*3;
+            const y3 = y2;
+            const x_start = x1+side;
+            const y_start = y1;
+
+            drawGasketCurve(x1, y1, x2, y2, x3, y3, x_start, y_start);
+            if (iterations < maxIterations) {
+                iterations++;
+                setTimeout(animate, animationSpeed);
+            }
+        }
+
+        animateRandomWalk();
+
+    </script>
+</body>
+</html>
