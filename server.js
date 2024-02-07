@@ -145,6 +145,11 @@ app.get('/fetching_terminy', authenticateTokenUser, (req, res) => {
   });
 });
 
+app.get('/', (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end('This webpage is working!');
+});
+
 app.get('/main_page', (req, res) => {
   fs.readFile("Strona/main.html", 'utf8', (err, data) => {
     if (err) {
