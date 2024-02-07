@@ -214,7 +214,7 @@ app.post('/page_2', authenticateTokenUser, (req, res) => {
 });
 
 
-const port = 8013;
+const port =  process.env.PORT || 8080;
 const hostname = 'pascal.fis.agh.edu.pl';
 
 // Start the server
