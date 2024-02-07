@@ -151,7 +151,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/main_page', (req, res) => {
-  fs.readFile("Strona/main.html", 'utf8', (err, data) => {
+  fs.readFile("./Strona/main.html", 'utf8', (err, data) => {
     if (err) {
         console.log(err);
         // If an error occurs, send a 500 Internal Server Error response
