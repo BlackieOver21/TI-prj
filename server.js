@@ -34,44 +34,6 @@ function authenticateTokenUser(req, res, next) {
   });
 }
 
-function authenticateTokenPracownik(req, res, next) {
-  const token = req.cookies.sessionToken;
-  console.log(token);
-  if (!token) {
-    return res.status(401).send('Unauthorized: No token provided');
-  }
-
-  jwt.verify(token, secretKey, (err, user) => {
-    if (err) {
-      return res.status(403).send('Forbidden: Invalid token');
-    }
-    if (user.group < 3) {
-      return res.status(403).send('Forbidden: Invalid access');
-    }
-    req.user = user;
-    next();
-  });
-}
-
-function authenticateTokenLekarz(req, res, next) {
-  const token = req.cookies.sessionToken;
-  console.log(token);
-  if (!token) {
-    return res.status(401).send('Unauthorized: No token provided');
-  }
-
-  jwt.verify(token, secretKey, (err, user) => {
-    console.log(user);
-    if (err) {
-      return res.status(403).send('Forbidden: Invalid token');
-    }
-    if (user.group != 2) {
-      return res.status(403).send('Forbidden: Invalid access');
-    }
-    req.user = user;
-    next();
-  });
-}
 const app = express();
 
 // Use bodyParser middleware to parse JSON in request body
@@ -133,7 +95,7 @@ app.post('/login', (req, res) => {
             console.log(result.rows[0].sprawdz_haslo);
             res.cookie('sessionToken', sessionToken, { httpOnly: true });
             res.cookie('login', data.login, { maxAge: 900000, httpOnly: true });
-           // res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
+            //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
             if (result.rows[0].sprawdz_haslo == 1) res.redirect('/pacjent_loggedin');
             if (result.rows[0].sprawdz_haslo == 2) res.redirect('/lekarz_loggedin');
             if (result.rows[0].sprawdz_haslo >= 3) res.redirect('/pracownik_loggedin');
@@ -183,7 +145,7 @@ app.get('/fetching_terminy', authenticateTokenUser, (req, res) => {
   });
 });
 
-app.get('/main_page', authenticateTokenPracownik, (req, res) => {
+app.get('/main_page', (req, res) => {
   fs.readFile("Strona/main.html", 'utf8', (err, data) => {
     if (err) {
         // If an error occurs, send a 500 Internal Server Error response
@@ -198,7 +160,7 @@ app.get('/main_page', authenticateTokenPracownik, (req, res) => {
 });
 });
 
-app.get('/info', authenticateTokenPracownik, (req, res) => {
+app.get('/info', (req, res) => {
   fs.readFile("Strona/sierpinski.html", 'utf8', (err, data) => {
     if (err) {
         // If an error occurs, send a 500 Internal Server Error response
@@ -213,7 +175,7 @@ app.get('/info', authenticateTokenPracownik, (req, res) => {
 });
 });
 
-app.get('/demo', authenticateTokenPracownik, (req, res) => {
+app.get('/demo', authenticateTokenUser, (req, res) => {
   fs.readFile("Strona/demo.html", 'utf8', (err, data) => {
     if (err) {
         // If an error occurs, send a 500 Internal Server Error response
