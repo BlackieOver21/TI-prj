@@ -171,7 +171,8 @@ app.get('/main_page', (req, res) => {
 });
 
 app.get('/info', (req, res) => {
-  fs.readFile("Strona/sierpinski.html", 'utf8', (err, data) => {
+  const htmlFilePath = path.join(__dirname, 'Strona', 'trojkat.html');
+  fs.readFile(htmlFilePath, 'utf8', (err, data) => {
     if (err) {
         // If an error occurs, send a 500 Internal Server Error response
         res.writeHead(500, { 'Content-Type': 'text/plain' });
@@ -186,7 +187,8 @@ app.get('/info', (req, res) => {
 });
 
 app.get('/demo', authenticateTokenUser, (req, res) => {
-  fs.readFile("Strona/demo.html", 'utf8', (err, data) => {
+  const htmlFilePath = path.join(__dirname, 'Strona', 'demo.html');
+  fs.readFile(htmlFilePath, 'utf8', (err, data) => {
     if (err) {
         // If an error occurs, send a 500 Internal Server Error response
         res.writeHead(500, { 'Content-Type': 'text/plain' });
