@@ -186,7 +186,7 @@ app.get('/info', (req, res) => {
 });
 });
 
-app.get('/demo', authenticateTokenUser, (req, res) => {
+app.get('/demo', (req, res) => {
   const htmlFilePath = path.join(__dirname, 'Strona', 'demo.html');
   fs.readFile(htmlFilePath, 'utf8', (err, data) => {
     if (err) {
@@ -202,7 +202,7 @@ app.get('/demo', authenticateTokenUser, (req, res) => {
 });
 });
 
-app.post('/page_1', (req, res) => {
+app.post('/save_preference', authenticateTokenUser, (req, res) => {
   const data = req.body;
   
   console.log('Received POST request data:', req.body);
@@ -216,10 +216,6 @@ app.post('/page_1', (req, res) => {
     console.error('Error ', err);
   });
 });
-
-app.post('/page_2', authenticateTokenUser, (req, res) => {
-});
-
 
 const port =  process.env.PORT || 8080;
 const hostname = 'pascal.fis.agh.edu.pl';

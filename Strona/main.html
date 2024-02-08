@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/main.css" rel="stylesheet" type="text/css"/>
+    <script src="/Scripts.js"></script>
     <title>Medical Center</title>
 </head>
 
 <body>
     <div class="navbar">
-        <a href="https://ti-prj.vercel.app/login">Login</a>
+        <a><button id="loginButton">Login</button></a>
         <a href="https://ti-prj.vercel.app/demo">Demo</a>
         <a href="https://ti-prj.vercel.app/info">Trójkąt Sierpińskiego</a>
         <a class="active" href="https://ti-prj.vercel.app/main_page">Strona główna</a>
@@ -20,7 +21,19 @@
         <h1>Fraktale Sierpińskiego</h1>
     </header>
 
-
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 
     <section class="text-container">
 
@@ -40,6 +53,20 @@
 
     </section>
 
+    <script>
+        const loginButton = document.getElementById('loginButton');
+        const popup = document.getElementById('popup');
+        const closeButton = document.querySelector('.close');
+        const loginForm = document.getElementById('loginForm');
+
+        loginButton.addEventListener('click', function() {
+            popup.style.display = 'block';
+        });
+
+        closeButton.addEventListener('click', function() {
+            popup.style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>
