@@ -109,13 +109,16 @@ h1 {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .popup-content {
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
     background-color: rgb(0, 0, 58);
     border: 1px solid #1ae5ac;
     border-radius: 5px;
