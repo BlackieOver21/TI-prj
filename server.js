@@ -41,6 +41,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'Strona')));
+
 // Define a route that handles POST requests
 app.post('/newuser', (req, res) => {
   const data = req.body;
@@ -151,7 +154,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/main_page', (req, res) => {
-  fs.readFile("/Strona/main.html", 'utf8', (err, data) => {
+  const htmlFilePath = path.join(__dirname, 'Strona', 'main.html');
+  fs.readFile(htmlFilePath, 'utf8', (err, data) => {
     if (err) {
         console.log(err);
         // If an error occurs, send a 500 Internal Server Error response
