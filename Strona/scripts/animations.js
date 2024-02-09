@@ -123,9 +123,9 @@ function animateCurve(ratio) {
 
     ctx.clearRect(0, 0, width, height);
 
-    context.fillStyle = 'white'; // Change this to the color you want
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = 'black'; // Change this to the color you want
+    ctx.fillStyle = 'white'; // Change this to the color you want
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black'; // Change this to the color you want
     
     const side = 300;
     const x1 = 50;
@@ -216,9 +216,9 @@ function animateRandomDot() {
 
     const animationSpeed = 0.5; // Adjust as needed
 
-    context.fillStyle = 'white'; // Change this to the color you want
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = 'black'; // Change this to the color you want
+    ctx.fillStyle = 'white'; // Change this to the color you want
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black'; // Change this to the color you want
 
     ctx.fillRect(triangleVertices[0].x, triangleVertices[0].y, 2, 2);
     ctx.fillRect(triangleVertices[1].x, triangleVertices[1].y, 2, 2);
