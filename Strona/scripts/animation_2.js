@@ -121,8 +121,12 @@ function animateCurve(ratio) {
     const maxIterations = 10; // Maximum number of iterations
     const animationSpeed = 300; // Animation speed in milliseconds
 
-
     ctx.clearRect(0, 0, width, height);
+
+    context.fillStyle = 'white'; // Change this to the color you want
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = 'black'; // Change this to the color you want
+    
     const side = 300;
     const x1 = 50;
     const y1 = height - 50;
@@ -204,7 +208,7 @@ function animateRandomDot() {
     const width = canvas.width = 500;
     const height = canvas.height = 500;
     
-        const triangleVertices = [
+    const triangleVertices = [
         { x: width / 2, y: 100 }, // Vertex 1
         { x: 100, y: height - 100 }, // Vertex 2
         { x: width - 100, y: height - 100 } // Vertex 3
@@ -212,16 +216,20 @@ function animateRandomDot() {
 
     const animationSpeed = 0.5; // Adjust as needed
 
+    context.fillStyle = 'white'; // Change this to the color you want
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = 'black'; // Change this to the color you want
+
     ctx.fillRect(triangleVertices[0].x, triangleVertices[0].y, 2, 2);
     ctx.fillRect(triangleVertices[1].x, triangleVertices[1].y, 2, 2);
     ctx.fillRect(triangleVertices[2].x, triangleVertices[2].y, 2, 2);
 
     let currentPosition = getRandomPointInTriangle(triangleVertices);  
 
-    animate_dot(currentPosition, triangleVertices, ctx)
+    animate_dot(currentPosition, triangleVertices, ctx, animationSpeed)
 }
 
-function animate_dot(currentPosition, triangleVertices, ctx) {
+function animate_dot(currentPosition, triangleVertices, ctx, animationSpeed) {
     const randomVertexIndex = Math.floor(Math.random() * 3); // Randomly select a vertex
     const selectedVertex = triangleVertices[randomVertexIndex];
     currentPosition.x += (selectedVertex.x - currentPosition.x) / 2;
