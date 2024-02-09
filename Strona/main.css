@@ -115,10 +115,10 @@ h1 {
 }
 
 .popup-content {
-    /* position: absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); */
+    transform: translate(-50%, -50%);
     background-color: rgb(0, 0, 58);
     border: 1px solid #1ae5ac;
     border-radius: 5px;
@@ -137,4 +137,19 @@ h1 {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+from {-webkit-transform: scale(0)}
+to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+from {transform: scale(0)}
+to {transform: scale(1)}
 }
