@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/main.css" rel="stylesheet" type="text/css"/>
-    <title>Medical Center</title>
+    <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
+    <script src="/scripts/animations.js"></script>
+    <title>Fraktale</title>
 </head>
 
 <body>
@@ -19,36 +20,22 @@
     <header>
         <h1>Fraktale Sierpińskiego</h1>
     </header>
-
-
-
-    <section class="text-container">
-
-        <img class="image-2" src="/res/waclaw_sierpinski.jpg" alt="Waclaw Sierpiński">
-
-        <p>Wacław Sierpiński (1882-1969) urodził się 14 marca 1882. Gdyby Dzień liczby π obchodzono już wtedy (a nie od 1988 roku), 
-            sympatycy Profesora mieliby dodatkowy powód do świętowania Jego urodzin. My postanowiliśmy wykorzystać tegoroczny dzień π 
-            do przybliżenia dokonań Profesora.
-
-            Profesor Sierpiński był jednym z największych polskich matematyków, twórcą tak zwanej warszawskiej szkoły matematycznej, 
-            skupiającej najwybitniejszych specjalistów od analizy, logiki, teorii mnogości i topologii, którzy działali w naszym kraju 
-            w okresie międzywojennym (1915-1939). Sam Profesor specjalizował się w teorii zbiorów i topologii. </p>
-            
-        <p> Szerokiej matematycznej społeczności Profesor Sierpiński kojarzy się przede wszystkim z… dywanami. </p>
-            
-        <p>Nie takimi, które układa się na podłodze, ale dywanami matematycznymi, które konstruuje się w pewien szczególny sposób.</p>
-
-        <p>Trójkąt Sierpińskiego (znany też jako uszczelka Sierpińskiego) - jeden z najprostszych fraktali. 
-            Znany był na długo przed powstaniem tego pojęcia (patrz: Benoît Mandelbrot). 
-            Konstrukcja tego zbioru została podana przez polskiego matematyka Wacława Sierpińskiego w 1915 roku.
-
-        <p>Trójkąt Sierpińskiego otrzymuje się następująco: w trójkącie równobocznym łączy się środki boków, dzieląc go w ten sposób 
-            na cztery mniejsze trójkąty. Trójkąt środkowy usuwa się (bez boków), a wobec trzech pozostałych trójkątów operację się powtarza, 
-            dzieląc każdy z nich na cztery mniejsze trójkąty, usuwając środkowy (bez boków), a wobec pozostałych trójkątów czynności się powtarzają. 
-            Po każdym powtórzeniu tej operacji z figury zostają usunięte pewne punkty. Punkty, które nie zostaną usunięte, tworzą trójkąt 
-            Sierpińskiego[.</p>
-
-    </section>
+    
+    <div>
+        <canvas id="sierpinskiCanvas"></canvas>
+        <div>
+            <select id="choice">
+                <option value="">Choose an option...</option>
+                <option value="curve">Curve</option>
+                <option value="randomdot">RandomDot2</option>
+                <option value="pascal">Pascal</option>
+            </select>
+            <label for="order">Stopień: 1</label><input type="range" min="1" max="7" name="order">
+            <label for="order">7</label> 
+            <br> <button onclick="animate()">Animacja</button> <button disabled="true">Zapisz w profilu</button>
+            <br> <section class="text-container">There will be explanation!</section>
+        </div>
+    </div>
 
 </body>
 
