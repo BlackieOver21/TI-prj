@@ -136,7 +136,7 @@ function animateCurve(ratio) {
     drawGasketCurve(x1, y1, x2, y2, x3, y3, x4, y4, iterations, 0, 1, ctx);
     if (iterations < maxIterations) {
         iterations++;
-        setTimeout(animate, animationSpeed);
+        setTimeout(animateCurve, animationSpeed);
     }
 }
 
@@ -229,7 +229,7 @@ function animate_dot(currentPosition, triangleVertices, ctx) {
 
     ctx.fillRect(currentPosition.x, currentPosition.y, 2, 2); // Plot the current position
 
-    setTimeout(animateRandomWalk, animationSpeed);
+    setTimeout(animate_dot, animationSpeed);
 }
 
 //animateRandomDot();     ------ function to call to animate RandomDot
