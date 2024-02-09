@@ -128,6 +128,11 @@ drawGasketCurve(x3, y3, x32, y32, x33, y33, x4, y4, level - 1, iter+1);
 
     function animate(ratio) {
         ctx.clearRect(0, 0, width, height);
+
+        ctx.fillStyle = 'white'; // Change this to the color you want
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = 'black'; // Change this to the color you want
+        
         const side = 300;
         const x1 = 50;
         const y1 = height - 50;
