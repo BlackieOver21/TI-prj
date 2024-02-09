@@ -18,6 +18,10 @@ function animateCurve(){
     const maxIterations = 10; // Maximum number of iterations
     const animationSpeed = 300; // Animation speed in milliseconds
 
+    ctx.fillStyle = 'white'; // Change this to the color you want
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = 'black'; // Change this to the color you want
+
     function drawGasketCurve(x1, y1, x2, y2, x3, y3, x4, y4, level, iter, ratio) {
         if (level === 0) {
             ctx.beginPath();
@@ -188,9 +192,7 @@ drawGasketCurve(x3, y3, x32, y32, x33, y33, x4, y4, level - 1, iter+1);
 ///
 //
 
-function animateRandomDot() {
-    
-        
+function animateRandomDot() {    
     const canvas = document.getElementById('sierpinskiCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -202,6 +204,10 @@ function animateRandomDot() {
         { x: 100, y: height - 100 }, // Vertex 2
         { x: width - 100, y: height - 100 } // Vertex 3
     ];
+
+    ctx.fillStyle = 'white'; // Change this to the color you want
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = 'black'; // Change this to the color you want
 
     ctx.fillRect(triangleVertices[0].x, triangleVertices[0].y, 2, 2);
     ctx.fillRect(triangleVertices[1].x, triangleVertices[1].y, 2, 2);
