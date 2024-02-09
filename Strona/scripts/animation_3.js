@@ -109,22 +109,26 @@ function drawGasketCurve(x1, y1, x2, y2, x3, y3, x4, y4, level, iter, ratio, ctx
     }
 }
 
-function animateCurve(ratio) {
-
+function animateCurve(){
     const canvas = document.getElementById('sierpinskiCanvas');
     const ctx = canvas.getContext('2d');
     
     const width = canvas.width = 500;
     const height = canvas.height = 500;
     
-    let iterations = 0; // Start with 0 iterations
+    let iterations = 0; // Start with 0 iterationsz
     const maxIterations = 10; // Maximum number of iterations
     const animationSpeed = 300; // Animation speed in milliseconds
+
+    animate_curve();
+}
+
+function animate_curve(ctx, ratio) {
 
     ctx.clearRect(0, 0, width, height);
 
     ctx.fillStyle = 'white'; // Change this to the color you want
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, width, height);
     ctx.fillStyle = 'black'; // Change this to the color you want
     
     const side = 300;
@@ -140,7 +144,7 @@ function animateCurve(ratio) {
     drawGasketCurve(x1, y1, x2, y2, x3, y3, x4, y4, iterations, 0, 1, ctx);
     if (iterations < maxIterations) {
         iterations++;
-        setTimeout(animateCurve, animationSpeed);
+        setTimeout(animate_curve, animationSpeed);
     }
 }
 
@@ -190,6 +194,13 @@ function animateCurve(ratio) {
 ///
 //
 
+
+const triangleVertices = [
+    { x: width / 2, y: 100 }, // Vertex 1
+    { x: 100, y: height - 100 }, // Vertex 2
+    { x: width - 100, y: height - 100 } // Vertex 3
+];
+
 function getRandomPointInTriangle(triangleVertices) {
     const u = Math.random();
     const v = Math.random();
@@ -207,12 +218,6 @@ function animateRandomDot() {
     
     const width = canvas.width = 500;
     const height = canvas.height = 500;
-    
-    const triangleVertices = [
-        { x: width / 2, y: 100 }, // Vertex 1
-        { x: 100, y: height - 100 }, // Vertex 2
-        { x: width - 100, y: height - 100 } // Vertex 3
-    ];
 
     const animationSpeed = 0.5; // Adjust as needed
 
