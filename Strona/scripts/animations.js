@@ -241,7 +241,7 @@ function animate_dot(currentPosition, triangleVertices, ctx) {
 //
 
 
-function animate() {
+function animate_this() {
     const choice = document.getElementById('choice').value;
     if (choice) {
         switch (choice) {
