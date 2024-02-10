@@ -21,21 +21,7 @@
 
       
     <canvas id="myCanvas" width="200" height="200"></canvas>
-    <script>
-        const worker = new Worker('/julia1.js');
-        worker.onmessage = function(e) {
-            const {x, y, pallette} = event.data;
-            var canvas = document.getElementById('myCanvas');
-            var context = canvas.getContext('2d');
-
-            context.beginPath();
-            context.rect(x, y, 2, 2);
-            context.fillStyle = pallette[i];
-            context.fill();
-        };
-
-        worker.postMessage('startAnimation');
-    </script>
+    <script src="/julia2.js"></script>
 
     <header>
         <h1>Fraktale Sierpińskiego</h1>
