@@ -3,8 +3,8 @@ var creal = -.4
 var cimag = .156;
 var canvas1 = document.getElementById('myCanvas1');
 var canvas2 = document.getElementById('myCanvas2');
-var context1 = canvas.getContext('2d');
-var context2 = canvas.getContext('2d');
+var context1 = canvas1.getContext('2d');
+var context2 = canvas2.getContext('2d');
 var frame = 0;
  
 var pallette=[]; //an array that stores the RGB combinations
