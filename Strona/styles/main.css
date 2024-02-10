@@ -171,3 +171,8 @@ header {
     text-align: center;
     justify-content: center;
 }
+
+.container {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Align items vertically in the center */
+}
