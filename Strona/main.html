@@ -24,11 +24,14 @@
     <script>
         const worker = new Worker('/julia.js');
         worker.onmessage = function(e) {
-            // Receive position data from the web worker
-            const posX = e.data.position;
+            const {x, y, pallette} = event.data;
+            var canvas = document.getElementById('myCanvas');
+            var context = canvas.getContext('2d');
 
-            // Update UI or perform any necessary action based on position data
-            console.log('Position X:', posX);
+            context.beginPath();
+            context.rect(x, y, 2, 2);
+            context.fillStyle = pallette[i];
+            context.fill();
         };
 
         worker.postMessage('startAnimation');

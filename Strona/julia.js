@@ -6,8 +6,6 @@ self.addEventListener('message', function(e) {
 function animate(){
         var creal = -.4
         var cimag = .156;
-        var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext('2d');
         var frame = 0;
         
         var pallette=[]; //an array that stores the RGB combinations
@@ -32,10 +30,12 @@ function animate(){
                                 while ((cx*cx+cy*cy<4)&&i<25);
         
                                 //i=i.toString(16); - commented out since not needed in this version
-                                context.beginPath();
-                                context.rect(x, y, 2, 2);
-                                context.fillStyle = pallette[i];
-                                context.fill();
+                                result = {
+                                        x:x,
+                                        y:y,
+                                        pallette:pallette
+                                }
+                                        self.postMessage(result);
                                 }
                         }
                 frame++;
