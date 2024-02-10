@@ -22,7 +22,7 @@
       
     <canvas id="myCanvas" width="200" height="200"></canvas>
     <script>
-        const worker = new Worker('/julia.js');
+        const worker = new Worker('/julia1.js');
         worker.onmessage = function(e) {
             const {x, y, pallette} = event.data;
             var canvas = document.getElementById('myCanvas');
