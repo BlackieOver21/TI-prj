@@ -1,5 +1,4 @@
 
-
 .popup {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -67,15 +66,21 @@ body, ul {
 }
 
 body {
-    margin-left: 16rem;
-    margin-right: 16rem;
+    margin-left: 13rem;
+    margin-right: 13rem;
 }
 
 /* Style the navigation bar */
 .navbar {
-    background-color:  rgb(0, 0, 29);;
+    background-color:  #00001d;;
     overflow: hidden;
     color: aqua;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Style the links inside the navigation bar */
@@ -155,4 +160,14 @@ h1 {
 
 .text-container {
     overflow: hidden; /* Clear the float */
+}
+
+header {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    align-self: center;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }

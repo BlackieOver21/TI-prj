@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
     <script src="/scripts/animations_new_2.js"></script>
+    <link href="styles/main.css" rel="stylesheet" type="text/css"/>
+    <script src="scripts/animations_new_2.js"></script>
     <title>Fraktale</title>
 </head>
 
@@ -16,14 +18,15 @@
         <a href="https://ti-prj.vercel.app/info">Trójkąt Sierpińskiego</a>
         <a href="https://ti-prj.vercel.app/main_page">Strona główna</a>
       </div>
-
     <header>
         <h1>Fraktale Sierpińskiego</h1>
     </header>
     
-    <div>
+    <div style="display: flex;">
+        <div style="flex: 1;">
         <canvas id="sierpinskiCanvas"></canvas>
-        <div>
+        </div>
+        <div style="flex: 1;">
             <select id="choice">
                 <option value="">Choose an option...</option>
                 <option value="curve">Curve</option>

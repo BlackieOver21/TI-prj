@@ -149,8 +149,20 @@ app.get('/fetching_terminy', authenticateTokenUser, (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end('This webpage is working!');
+  const htmlFilePath = path.join(__dirname, 'Strona', 'main.html');
+  fs.readFile(htmlFilePath, 'utf8', (err, data) => {
+    if (err) {
+        console.log(err);
+        // If an error occurs, send a 500 Internal Server Error response
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('500 Internal Server Error');
+        return;
+    }
+
+    // Send the HTML content as the response
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(data);
+});
 });
 
 app.get('/main_page', (req, res) => {

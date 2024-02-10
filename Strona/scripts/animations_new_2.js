@@ -286,6 +286,23 @@ function animate_this() {
             default:
                 // code to execute if expression doesn't match any case
         }
+        setExplanation(choice);
     } else {
     }
+}
+
+function setExplanation(choice){
+    if (choice) {
+        switch (choice) {
+            case "curve":
+                break;
+            case "randomdot":
+                break;
+            // Add more cases as needed
+            default:
+                // code to execute if expression doesn't match any case
+        }
+    } else {
+    }
+
 }
