@@ -528,6 +528,7 @@ function existsCookie(cookieName) {
     // Get all cookies
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
+        console.log(cookies[i]);
         var parts = cookies[i].split('=');
         var name = parts[0];
         var value = parts[1];
