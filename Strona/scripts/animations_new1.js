@@ -589,3 +589,27 @@ function logOut(){
     document.cookie = "sessionToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
+
+function switch_reg(){
+    form = document.getElementById("loginForm");
+    btn = document.getElementById("switch");
+    if(btn.innerText == 'L'){
+        btn.innerText = 'R';
+        form.innerHTML = '\
+        <label for="username">Login:</label>\
+        <input type="text" id="username" name="username"><br><br>\
+        <label for="password">Hasło:</label>\
+        <input type="password" id="password" name="password"><br><br>\
+        <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zarejestruj się</button></div>';
+        form.action = "https://ti-prj.vercel.app/newuser";
+    } else if (btn.innerText == 'R'){
+        btn.innerText = 'L';
+        form.innerHTML = '\
+        <label for="username">Login:</label>\
+        <input type="text" id="username" name="username"><br><br>\
+        <label for="password">Hasło:</label>\
+        <input type="password" id="password" name="password"><br><br>\
+        <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zaloguj się</button></div>';
+        form.action = "https://ti-prj.vercel.app/login";
+    }
+}

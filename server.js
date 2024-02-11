@@ -49,11 +49,23 @@ app.post('/newuser', (req, res) => {
   const data = req.body;
 
   console.log('Received POST request data:', data);
+  console.log('Received POST request password and login:', data.username, data.password);
 
-  var resp = logins.AddUser(data.login, data.pass);
-  console.log(resp);
+  var resp = logins.RegisterNewUser(data.username, data.password);
 
-  res.status(200).send('POST request received successfully');
+  resp.then(result => {
+      console.log('Query result:', result);
+      if(result){
+          const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
+          //storeSessionData(sessionToken, data);
+          res.cookie('sessionToken', sessionToken, { httpOnly: true });
+          res.cookie('login', data.username, { maxAge: 900000, httpOnly: true });
+          //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
+          res.redirect('/main_page');
+      } else {
+          res.status(200).send('Request denied - password ' + data.password + ' is incorrect.\n');
+      }
+    })
 });
 
 app.post('/chkpwd', (req, res) => {
