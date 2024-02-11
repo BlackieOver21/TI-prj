@@ -58,15 +58,16 @@ function RegisterNewUser(username, password) {
 
         // Access the inserted row (if needed)
         console.log('Inserted row:', result.rows[0]);
+        client.end();
 
         return(0); // You may want to return the inserted data or an indicator of success
       }).catch((error) => {
         console.error('Error executing query:', error);
+        client.end();
         // Handle the error here
         return(1); // Rethrow the error for handling at a higher level
       })
     
-  client.end();
 }
 
 async function AddPreference(preference, username) {
