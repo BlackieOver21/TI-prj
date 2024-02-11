@@ -29,8 +29,9 @@ async function CheckPassword(login, haslo) {
   }
 }
 
-function RegisterNewUser(user) {
-  const params = [user.username, user.password];
+function RegisterNewUser(username, password) {
+  const params = [username, password];
+  console.log(params);
   const query = `INSERT INTO users (username, password) VALUES ($1, $2);`
 
   client.query(query, params)
