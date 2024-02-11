@@ -527,17 +527,15 @@ function SavePreference(){
 function existsCookie(cookieName) {
     // Get all cookies
     const cookies = document.cookie.split(';');
-
-    cookieArray.forEach(function(cookie) {
+    for (let i = 0; i < cookies.length; i++) {
         var parts = cookies[i].split('=');
         var name = parts[0];
         var value = parts[1];
-        console.log(name);
         if (cookieName == name) {
             // Cookie found
             return true;
         }
-    });
+    }
     // Cookie not found
     return false;
 }
