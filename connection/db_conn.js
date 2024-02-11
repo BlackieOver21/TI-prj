@@ -1,4 +1,4 @@
-const { Pool } = require('pg');
+const { Client } = require('pg');
 
 // Connection information for your PostgreSQL database
 const connectionData = {
@@ -14,7 +14,7 @@ const connectionData = {
 };
 
 // Create a new PostgreSQL client
-const pool = new Pool(connectionData);
+const client = new Client(connectionData);
 
 // Connect to the PostgreSQL server
 client.connect()
