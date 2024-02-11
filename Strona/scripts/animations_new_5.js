@@ -528,13 +528,16 @@ function existsCookie(cookieName) {
     // Get all cookies
     const cookies = document.cookie.split(';');
 
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith(cookieName + '=')) {
+    cookieArray.forEach(function(cookie) {
+        var parts = cookies[i].split('=');
+        var name = parts[0];
+        var value = parts[1];
+        console.log(name);
+        if (cookieName == name) {
             // Cookie found
             return true;
         }
-    }
+    });
     // Cookie not found
     return false;
 }
