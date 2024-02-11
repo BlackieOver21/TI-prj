@@ -26,12 +26,15 @@ async function addUser(username, email, password) {
 async function CheckPassword(login, haslo) {
   try {
     // Retrieve user's information from the database
+    client.connect();
     const result = await client.query('SELECT username, password FROM users WHERE username = $1', [login]);
 
     // Check if a user with the given username exists
     if (result.rows.length === 0) {
       return false; // User does not exist
     }
+
+    client.end();
 
     // Retrieve the password from the database
     const Password = result.rows[0].password;
@@ -44,6 +47,8 @@ async function CheckPassword(login, haslo) {
 }
 
 function RegisterNewUser(username, password) {
+  client.connect();
+
   const params = [username, password];
   console.log(params);
   const query = `INSERT INTO TI_prj.users (username, password) VALUES ($1, $2);`
@@ -60,6 +65,8 @@ function RegisterNewUser(username, password) {
         // Handle the error here
         return(1); // Rethrow the error for handling at a higher level
       })
+    
+  client.end();
 }
 
 async function AddPreference(preference, username) {
@@ -87,6 +94,8 @@ async function AddPreference(preference, username) {
 
     console.log(query);
 
+    client.connect();
+
     client.query(query, params)
       .then((result) => {
 
@@ -100,6 +109,8 @@ async function AddPreference(preference, username) {
         // Handle the error here
         reject(error); // Rethrow the error for handling at a higher level
       })
+
+    client.end();
   });
 }
 
