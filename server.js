@@ -95,9 +95,8 @@ app.post('/login', (req, res) => {
         if(result){
             const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
             //storeSessionData(sessionToken, data);
-            console.log(result.rows[0].sprawdz_haslo);
             res.cookie('sessionToken', sessionToken, { httpOnly: true });
-            res.cookie('login', data.login, { maxAge: 900000, httpOnly: true });
+            res.cookie('login', data.username, { maxAge: 900000, httpOnly: true });
             //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
             res.redirect('/main_page');
         } else {
