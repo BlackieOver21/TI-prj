@@ -85,7 +85,8 @@ app.post('/chgpwd', (req, res) => {
 app.post('/login', (req, res) => {
     const data = req.body;
   
-    console.log('Received POST request data:', req.body);
+    console.log('Received POST request data:', data);
+    console.log('Received POST request password and login:', data.username, data.password);
 
     var resp = logins.CheckPassword(data.username, data.password);
 

@@ -12,7 +12,7 @@ const AddUser = (login, haslo) => {
 async function CheckPassword(login, haslo) {
   try {
     // Retrieve user's information from the database
-    const result = await pool.query('SELECT username, password FROM users WHERE username = $1', [username]);
+    const result = await client.query('SELECT username, password FROM users WHERE username = $1', [username]);
 
     // Check if a user with the given username exists
     if (result.rows.length === 0) {
