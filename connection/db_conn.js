@@ -20,7 +20,7 @@ const client = new Client(connectionData);
 client.connect()
   .then(() => {
     console.log('Connected to the PostgreSQL database');
-    client.query('SET search_path TO project_2');
+    client.query('SET search_path TO TI_prj');
    })
   .catch(err => {
     console.error('Error connecting to PostgreSQL database', err);
