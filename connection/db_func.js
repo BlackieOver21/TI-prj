@@ -30,24 +30,22 @@ async function CheckPassword(login, haslo) {
 }
 
 async function RegisterNewUser(user) {
-  return new Promise((resolve, reject) => {
-    const params = [user.username, user.password];
-    const query = `SET search_path TO TI_prj;
+  const params = [user.username, user.password];
+  const query = `SET search_path TO TI_prj;
                     INSERT INTO users (username, password) VALUES ($1, $2);`
 
-    client.query(query, params)
+  client.query(query, params)
       .then((result) => {
 
         // Access the inserted row (if needed)
         console.log('Inserted row:', result.rows[0]);
 
-        resolve(0); // You may want to return the inserted data or an indicator of success
+        return(0); // You may want to return the inserted data or an indicator of success
       }).catch((error) => {
         console.error('Error executing query:', error);
         // Handle the error here
-        reject(error); // Rethrow the error for handling at a higher level
+        return(1); // Rethrow the error for handling at a higher level
       })
-  });
 }
 
 async function AddPreference(preference, username) {
