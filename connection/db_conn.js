@@ -7,6 +7,10 @@ const connectionData = {
   database: process.env.POSTGRES_DATABASE,
   password: process.env.POSTGRES_PASSWORD,
   port: 5432, // Default PostgreSQL port
+  ssl: {
+    rejectUnauthorized: false, // Ignore self-signed certificates if necessary
+    sslmode: 'require', // Use 'require' to enforce SSL/TLS encryption
+  },
 };
 
 // Create a new PostgreSQL client
