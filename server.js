@@ -101,7 +101,7 @@ app.post('/login', (req, res) => {
             //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
             res.redirect('/main_page');
         } else {
-            res.status(200).send('Request denied - password ' + data.pass + ' is incorrect.\n');
+            res.status(200).send('Request denied - password ' + data.password + ' is incorrect.\n');
         }
       })
 });

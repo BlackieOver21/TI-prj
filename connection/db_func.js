@@ -21,7 +21,7 @@ async function CheckPassword(login, haslo) {
 
     // Retrieve the password from the database
     const Password = result.rows[0].password;
-
+    console.log(haslo, Password);
     return haslo == Password;
   } catch (error) {
     console.error('Error verifying user:', error);
