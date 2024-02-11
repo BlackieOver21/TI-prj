@@ -49,9 +49,9 @@ async function RegisterNewUser(user) {
   });
 }
 
-async function AddPreference(preference) {
+async function AddPreference(preference, username) {
   return new Promise((resolve, reject) => {
-    const params = [preference.username, preference.dx1, preference.dx2, preference.dx3, preference.dy1, preference.dy2, preference.dy3, preference.cl, preference.pl];
+    const params = [username, preference.dx1, preference.dx2, preference.dx3, preference.dy1, preference.dy2, preference.dy3, preference.cl, preference.pl];
     const query = `UPDATE users
                     SET dot_x1 = $2, dot_x2 = $3, dot_x3 = $4, dot_y1 = $5, dot_y2 = $6, dot_y3 = $7, curve_level = $8, pascal_level = $9
                     WHERE users.username = $1;`

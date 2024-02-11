@@ -523,3 +523,50 @@ function SavePreference(){
         console.error('There was a problem with the fetch operation:', error);
     });
 }
+
+function existsCookie(cookieName) {
+    // Get all cookies
+    const cookies = document.cookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(cookieName + '=')) {
+            // Cookie found
+            return true;
+        }
+    }
+    // Cookie not found
+    return false;
+}
+
+function logOut(){
+    // const url = 'https://ti-prj.vercel.app/logout';
+
+    // const postData = {};
+
+    // const options = {
+    // method: 'POST',
+    // headers: {
+    //     'Content-Type': 'application/json',
+    // },
+    // body: JSON.stringify(postData),
+    // };
+
+    // // Send the POST request using fetch
+    // fetch(url, options)
+    // .then(response => {
+    //     if (!response.ok) {
+    //     throw new Error('Network response was not ok');
+    //     }
+    //     return response.json(); // Parse the JSON response
+    // })
+    // .then(data => {
+    //     console.log('Response:', data); // Handle the response data
+    // })
+    // .catch(error => {
+    //     console.error('There was a problem with the fetch operation:', error);
+    // });
+
+    document.cookie = "sessionToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}

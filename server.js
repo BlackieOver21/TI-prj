@@ -105,6 +105,21 @@ app.post('/login', (req, res) => {
       })
 });
 
+app.post('/logout', (req, res) => {
+  const data = req.body;
+
+  console.log('Received POST request LOGOUT data:', data);
+
+  var resp = logins.CheckPassword(data.username, data.password);
+
+  const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
+  //storeSessionData(sessionToken, data);
+  res.cookie('sessionToken', sessionToken, { httpOnly: true });
+  res.cookie('login', data.username, { maxAge: 900000, httpOnly: true });
+  //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
+  res.redirect('/main_page');
+});
+
 app.post('/user_register', (req, res) => {
   const data = req.body;
 
@@ -217,7 +232,7 @@ app.post('/save_preference', authenticateTokenUser, (req, res) => {
   
   console.log('Received POST request data:', req.body);
 
-  logins.AddPreference(data)
+  logins.AddPreference(data, req.cookies.login)
   .then(() => {
     console.log('Dodano diagnoze.');
 
