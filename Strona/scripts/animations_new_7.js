@@ -489,16 +489,33 @@ function setExplanation(choice){
 function SavePreference(){
     const url = 'https://ti-prj.vercel.app/save_preference';
 
-    const postData = {
-        dx1: document.getElementById('x1').value,
-        dx2: document.getElementById('x2').value,
-        dx3: document.getElementById('x3').value,
-        dy1: document.getElementById('y1').value,
-        dy2: document.getElementById('y2').value,
-        dy3: document.getElementById('y3').value,
-        dcl: document.getElementById('order_curve').value,
-        dpl: document.getElementById('order_pascal').value,
-    };
+    
+    x1 = document.getElementById('x1');
+    cl = document.getElementById('order_curve');
+    pl = document.getElementById('pascal_curve');
+    var postData = {};
+
+    if(x1){
+        postData = {
+            change: 'dot',
+            dx1: document.getElementById('x1').value,
+            dx2: document.getElementById('x2').value,
+            dx3: document.getElementById('x3').value,
+            dy1: document.getElementById('y1').value,
+            dy2: document.getElementById('y2').value,
+            dy3: document.getElementById('y3').value,
+        };
+    }
+    else if(cl){
+        postData = {
+            change: 'curve',
+            dcl: document.getElementById('order_curve').value,
+        };}
+    else if(pl){
+        postData = {
+            change: 'pascal',
+            dpl: document.getElementById('order_pascal').value,
+        };}
 
     const options = {
     method: 'POST',

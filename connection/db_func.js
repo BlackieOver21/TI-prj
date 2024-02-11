@@ -51,10 +51,24 @@ async function RegisterNewUser(user) {
 
 async function AddPreference(preference, username) {
   return new Promise((resolve, reject) => {
-    const params = [username, preference.dx1, preference.dx2, preference.dx3, preference.dy1, preference.dy2, preference.dy3, preference.cl, preference.pl];
-    const query = `UPDATE users
-                    SET dot_x1 = $2, dot_x2 = $3, dot_x3 = $4, dot_y1 = $5, dot_y2 = $6, dot_y3 = $7, curve_level = $8, pascal_level = $9
+    var params = []
+    var query = ``;
+    if(preference.change == 'dot'){
+      params = [username, preference.dx1, preference.dx2, preference.dx3, preference.dy1, preference.dy2, preference.dy3];
+      query = `UPDATE users
+                    SET dot_x1 = $2, dot_x2 = $3, dot_x3 = $4, dot_y1 = $5, dot_y2 = $6, dot_y3 = $7
                     WHERE users.username = $1;`
+    } else if(preference.change == 'curve'){
+      params = [username, preference.cl];
+      query = `UPDATE users
+                    SET curve_level = $2
+                    WHERE users.username = $1;`
+    } else if(preference.change == 'pascal'){
+      params = [username, preference.pl];
+      query = `UPDATE users
+                    SET pascal_level = $2
+                    WHERE users.username = $1;`
+    }
 
     client.query(query, params)
       .then((result) => {
