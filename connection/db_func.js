@@ -12,7 +12,7 @@ const AddUser = (login, haslo) => {
 async function CheckPassword(login, haslo) {
   try {
     // Retrieve user's information from the database
-    const result = await client.query('SELECT username, password FROM users WHERE username = $1', [username]);
+    const result = await client.query('SELECT username, password FROM users WHERE username = $1', [login]);
 
     // Check if a user with the given username exists
     if (result.rows.length === 0) {
@@ -22,7 +22,7 @@ async function CheckPassword(login, haslo) {
     // Retrieve the password from the database
     const Password = result.rows[0].password;
 
-    return password == Password;
+    return haslo == Password;
   } catch (error) {
     console.error('Error verifying user:', error);
     return false;
