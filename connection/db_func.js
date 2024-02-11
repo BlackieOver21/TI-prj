@@ -18,7 +18,7 @@ async function addUser(username, password) {
 
     // Insert the new user into the database
     const result = await client.query(
-      'INSERT INTO users (username, email, password) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO TI_prj.users (username, password) VALUES ($1, $2) RETURNING *',
       [username, password]
     );
 
