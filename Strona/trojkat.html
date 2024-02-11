@@ -66,18 +66,26 @@
     </section>
 
     <script>
-        const loginButton = document.getElementById('loginButton');
-        const popup = document.getElementById('popup');
-        const closeButton = document.querySelector('.close');
-        const loginForm = document.getElementById('loginForm');
+        
+        console.log(existsCookie('sessionToken'));
+        if(existsCookie('sessionToken')){
+            const loginContainer = document.getElementById("login-container");
+            loginContainer.innerhtml = '<button id="logoutButton" class="loginButton" onclick="logOut()">Logout</button>';
+        } else {
+            const loginButton = document.getElementById('loginButton');
+            const popup = document.getElementById('popup');
+            const closeButton = document.querySelector('.close');
+            const loginForm = document.getElementById('loginForm');
 
-        loginButton.addEventListener('click', function() {
-            popup.style.display = 'flex';
-        });
+            loginButton.addEventListener('click', function() {
+                popup.style.display = 'flex';
+            });
 
-        closeButton.addEventListener('click', function() {
-            popup.style.display = 'none';
-        });
+            closeButton.addEventListener('click', function() {
+                popup.style.display = 'none';
+            });
+            
+        }
     </script>
 
 </body>

@@ -53,7 +53,7 @@
                 <option value="square">Square</option>
             </select>
             <div class="controls-container" id="controls-container"></div>
-            <br> <div style="display:flex; align-items: center;"><button onclick="animate_this()">Animacja</button> <button class="stop-button" onclick="all_stop()">Zatrzymaj</button> <button disabled="true" onclick="SavePreference()">Zapisz w profilu</button></div>
+            <br> <div style="display:flex; align-items: center;"><button onclick="animate_this()">Animacja</button> <button class="stop-button" onclick="all_stop()">Zatrzymaj</button> <button disabled="true" onclick="SavePreference()" id="preference-btn">Zapisz w profilu</button></div>
             <br> <section class="text-container" id="explanation-container">There will be explanation!</section>
         </div>
     </div>
@@ -63,18 +63,27 @@
 
     <script>
         setExplanation("curve");
-        const loginButton = document.getElementById('loginButton');
-        const popup = document.getElementById('popup');
-        const closeButton = document.querySelector('.close');
-        const loginForm = document.getElementById('loginForm');
+        
+        console.log(existsCookie('sessionToken'));
+        if(existsCookie('sessionToken')){
+            const loginContainer = document.getElementById("login-container");
+            loginContainer.innerhtml = '<button id="logoutButton" class="loginButton" onclick="logOut()">Logout</button>';
+            document.getElementById('preference-btn').disabled = false;
+        } else {
+            const loginButton = document.getElementById('loginButton');
+            const popup = document.getElementById('popup');
+            const closeButton = document.querySelector('.close');
+            const loginForm = document.getElementById('loginForm');
 
-        loginButton.addEventListener('click', function() {
-            popup.style.display = 'flex';
-        });
+            loginButton.addEventListener('click', function() {
+                popup.style.display = 'flex';
+            });
 
-        closeButton.addEventListener('click', function() {
-            popup.style.display = 'none';
-        });
+            closeButton.addEventListener('click', function() {
+                popup.style.display = 'none';
+            });
+            
+        }
 
         const choiceBox = document.getElementById('choice');
 
