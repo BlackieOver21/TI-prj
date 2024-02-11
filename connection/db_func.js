@@ -32,7 +32,8 @@ async function CheckPassword(login, haslo) {
 async function RegisterNewUser(user) {
   return new Promise((resolve, reject) => {
     const params = [user.username, user.password];
-    const query = `INSERT INTO users (username, password) VALUES ($1, $2);`
+    const query = `SET search_path TO TI_prj;
+                    INSERT INTO users (username, password) VALUES ($1, $2);`
 
     client.query(query, params)
       .then((result) => {
@@ -55,7 +56,8 @@ async function AddPreference(preference, username) {
     var query = ``;
     if(preference.change == 'dot'){
       params = [username, preference.dx1, preference.dx2, preference.dx3, preference.dy1, preference.dy2, preference.dy3];
-      query = `UPDATE users
+      query = `SET search_path TO TI_prj;
+                    UPDATE users
                     SET dot_x1 = $2, dot_x2 = $3, dot_x3 = $4, dot_y1 = $5, dot_y2 = $6, dot_y3 = $7
                     WHERE users.username = $1;`
     }
