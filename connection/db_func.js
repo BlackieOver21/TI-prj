@@ -31,8 +31,7 @@ async function CheckPassword(login, haslo) {
 
 function RegisterNewUser(user) {
   const params = [user.username, user.password];
-  const query = `SET search_path TO TI_prj;
-                    INSERT INTO users (username, password) VALUES ($1, $2);`
+  const query = `INSERT INTO users (username, password) VALUES ($1, $2);`
 
   client.query(query, params)
       .then((result) => {
