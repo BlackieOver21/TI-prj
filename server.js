@@ -65,6 +65,7 @@ app.post('/newuser', (req, res) => {
     }
 });
 
+
 app.post('/chkpwd', (req, res) => {
     const data = req.body;
   

@@ -20,7 +20,7 @@ const pool = new Pool(connectionData);
 client.connect()
   .then(() => {
     console.log('Connected to the PostgreSQL database');
-    client.query('SET search_path TO TI_prj;');
+    //client.query('SET search_path TO TI_prj;');
    })
   .catch(err => {
     console.error('Error connecting to PostgreSQL database', err);
