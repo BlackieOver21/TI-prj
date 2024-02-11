@@ -234,8 +234,8 @@ app.post('/save_preference', authenticateTokenUser, (req, res) => {
 
   logins.AddPreference(data, req.cookies.login)
   .then(() => {
-    console.log('Dodano diagnoze.');
-
+    console.log('Dodano preferencje.');
+    res.redirect('/demo');
    })
   .catch(err => {
     console.error('Error ', err);

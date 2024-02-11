@@ -76,7 +76,7 @@ async function AddPreference(preference, username) {
         // Access the inserted row (if needed)
         console.log('Inserted row:', result.rows[0]);
 
-        resolve(result.rows[0]); // You may want to return the inserted data or an indicator of success
+        resolve(true); // You may want to return the inserted data or an indicator of success
       }).catch((error) => {
         console.error('Error executing query:', error);
         // Handle the error here
