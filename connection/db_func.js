@@ -9,36 +9,60 @@ const AddUser = (login, haslo) => {
     return client.query(query, params);
 }
 
-const CheckPassword = (login, haslo) => {
+async function CheckPassword(login, haslo) {
+  try {
+    // Retrieve user's information from the database
+    const result = await pool.query('SELECT username, password FROM users WHERE username = $1', [username]);
 
-    const params = [login, haslo]; 
+    // Check if a user with the given username exists
+    if (result.rows.length === 0) {
+      return false; // User does not exist
+    }
 
-    const query = `SELECT * FROM sprawdz_haslo($1, $2)`;
+    // Retrieve the password from the database
+    const Password = result.rows[0].password;
 
-    return client.query(query, params);
-}
-
-const ChangePassword = (login, haslo1, haslo2) => {
-  
-    const params = [login, haslo1, haslo2]; 
-
-    const query = `SELECT * FROM zmien_haslo($1, $2, $3)`;
-
-    return client.query(query, params);
+    return password == Password;
+  } catch (error) {
+    console.error('Error verifying user:', error);
+    return false;
+  }
 }
 
 async function RegisterNewUser(user) {
   return new Promise((resolve, reject) => {
-    const params = [user.imie, user.nazwisko, user.pesel, user.login, user.haslo];
-    const query = `select * from wstawianie_pacjenta($1, $2, $3, $4, $5);`
+    const params = [user.username, user.password];
+    const query = `INSERT INTO users (username, password) VALUES ($1, $2);`
 
     client.query(query, params)
       .then((result) => {
 
         // Access the inserted row (if needed)
-        console.log('Inserted row:', result.rows[0].wstawianie_pacjenta);
+        console.log('Inserted row:', result.rows[0]);
 
-        resolve(result.rows[0].wstawianie_pacjenta); // You may want to return the inserted data or an indicator of success
+        resolve(0); // You may want to return the inserted data or an indicator of success
+      }).catch((error) => {
+        console.error('Error executing query:', error);
+        // Handle the error here
+        reject(error); // Rethrow the error for handling at a higher level
+      })
+  });
+}
+
+async function AddPreference(preference) {
+  return new Promise((resolve, reject) => {
+    const params = [preference.username, preference.dx1, preference.dx2, preference.dx3, preference.dy1, preference.dy2, preference.dy3, preference.cl, preference.pl];
+    const query = `UPDATE users
+                    SET dot_x1 = $2, dot_x2 = $3, dot_x3 = $4, dot_y1 = $5, dot_y2 = $6, dot_y3 = $7, curve_level = $8, pascal_level = $9
+                    WHERE users.username = $1;`
+
+    client.query(query, params)
+      .then((result) => {
+
+        // Access the inserted row (if needed)
+        console.log('Inserted row:', result.rows[0]);
+
+        resolve(result.rows[0]); // You may want to return the inserted data or an indicator of success
       }).catch((error) => {
         console.error('Error executing query:', error);
         // Handle the error here
@@ -50,6 +74,6 @@ async function RegisterNewUser(user) {
 module.exports = {
     AddUser,
     CheckPassword,
-    ChangePassword,
-    RegisterNewUser
+    RegisterNewUser,
+    AddPreference
 };

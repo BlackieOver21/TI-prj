@@ -2,10 +2,10 @@ const { Client } = require('pg');
 
 // Connection information for your PostgreSQL database
 const connectionData = {
-  user: 'u1bersutskyi',
-  host: 'pascal.fis.agh.edu.pl',
-  database: 'u1bersutskyi',
-  password: '1bersutskyi',
+  user: process.env.POSTGRES_USER,
+  host: process.env.POSTGRES_HOST,
+  database: process.env.POSTGRES_DATABASE,
+  password: process.env.POSTGRES_PASSWORD,
   port: 5432, // Default PostgreSQL port
 };
 

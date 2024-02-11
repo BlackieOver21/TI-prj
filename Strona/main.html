@@ -13,51 +13,53 @@
 
 <body>
     <div class="navbar">
-        <a><button id="loginButton">Login</button></a>
+        <canvas id="myCanvas1" width="100" height="100"></canvas>
+        <a style="padding: 0%;"><button id="loginButton" class="loginButton">Login</button></a>
         <a href="https://ti-prj.vercel.app/demo">Demo</a>
         <a href="https://ti-prj.vercel.app/info">Trójkąt Sierpińskiego</a>
         <a class="active" href="https://ti-prj.vercel.app/main_page">Strona główna</a>
       </div>
 
-    <div class="container">
-        <canvas id="myCanvas1" width="200" height="200"></canvas>
 
         <header>
             <h1>Fraktale Sierpińskiego</h1>
         </header>
-        
-        <canvas id="myCanvas2" width="200" height="200"></canvas>
+    
 
         <script src="/julia4.js"></script>
+        <script src="julia4.js"></script>
     </div>
-
+    
     <div id="popup" class="popup">
+    <div id="animate">
         <div class="popup-content">
             <span class="close">&times;</span>
-            <h2>Login</h2>
-            <form id="loginForm animate">
-                <label for="username">Username:</label>
+            <h2>Zaloguj się na konto</h2>
+            <form id="loginForm" action="https://ti-prj.vercel.app/login" method="post">
+                <label for="username">Login:</label>
                 <input type="text" id="username" name="username"><br><br>
-                <label for="password">Password:</label>
+                <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password"><br><br>
-                <img src="/res/submit_icon.png"><button type="submit">Login</button>
+                <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zaloguj się</button></div>
             </form>
         </div>
     </div>
+    </div>
+    
 
     <section class="text-container">
 
         <img class="image-2" src="/res/waclaw_sierpinski.jpg" alt="Waclaw Sierpiński">
 
-        <p>Wacław Sierpiński (1882-1969) urodził się 14 marca 1882. Gdyby Dzień liczby π obchodzono już wtedy (a nie od 1988 roku), 
-            sympatycy Profesora mieliby dodatkowy powód do świętowania Jego urodzin. My postanowiliśmy wykorzystać tegoroczny dzień π 
-            do przybliżenia dokonań Profesora.
+        <p>Wacław Franciszek Sierpiński (1882-1969) urodził się 14 marca 1882 w rodzinie Konstantego, lekarza, i Ludwiki z Łapińskich. 
+            W 1900 ukończył V Gimnazjum Klasyczne w Warszawie i rozpoczął studia na Wydziale Fizyko-Matematycznym Cesarskiego Uniwersytetu 
+            Warszawskiego. Studia ukończył w roku 1904, uzyskując stopień kandydata nauk i złoty medal za pracę z teorii liczb.</p>
 
-            Profesor Sierpiński był jednym z największych polskich matematyków, twórcą tak zwanej warszawskiej szkoły matematycznej, 
-            skupiającej najwybitniejszych specjalistów od analizy, logiki, teorii mnogości i topologii, którzy działali w naszym kraju 
-            w okresie międzywojennym (1915-1939). Sam Profesor specjalizował się w teorii zbiorów i topologii. </p>
+        <p>Profesor Sierpiński był jednym z największych polskich matematyków, twórcą tak zwanej warszawskiej szkoły matematycznej, 
+        skupiającej najwybitniejszych specjalistów od analizy, logiki, teorii mnogości i topologii, którzy działali w naszym kraju 
+        w okresie międzywojennym (1915-1939). Sam Profesor specjalizował się w teorii zbiorów i topologii. </p>
             
-        <p> Szerokiej matematycznej społeczności Profesor Sierpiński kojarzy się przede wszystkim z… dywanami. </p>
+        <p>Szerokiej matematycznej społeczności Profesor Sierpiński kojarzy się przede wszystkim z… dywanami. </p>
             
         <p>Nie takimi, które układa się na podłodze, ale dywanami matematycznymi, które konstruuje się w pewien szczególny sposób.</p>
 
@@ -70,7 +72,7 @@
         const loginForm = document.getElementById('loginForm');
 
         loginButton.addEventListener('click', function() {
-            popup.style.display = 'block';
+            popup.style.display = 'flex';
         });
 
         closeButton.addEventListener('click', function() {

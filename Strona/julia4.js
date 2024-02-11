@@ -2,9 +2,9 @@
 var creal = -.4
 var cimag = .156;
 var canvas1 = document.getElementById('myCanvas1');
-var canvas2 = document.getElementById('myCanvas2');
+//var canvas2 = document.getElementById('myCanvas2');
 var context1 = canvas1.getContext('2d');
-var context2 = canvas2.getContext('2d');
+//var context2 = canvas2.getContext('2d');
 var frame = 0;
  
 var pallette=[]; //an array that stores the RGB combinations
@@ -30,14 +30,14 @@ function julia()
  
                         //i=i.toString(16); - commented out since not needed in this version
                         context1.beginPath();
-                        context1.rect(x, y, 2, 2);
+                        context1.rect(x*0.5, y*0.5, 1, 1);
                         context1.fillStyle = pallette[i];
                         context1.fill();
                         
-                        context2.beginPath();
-                        context2.rect(x, y, 2, 2);
-                        context2.fillStyle = pallette[i];
-                        context2.fill();
+                        // context2.beginPath();
+                        // context2.rect(x, y, 2, 2);
+                        // context2.fillStyle = pallette[i];
+                        // context2.fill();
                         }
                 }
         frame++;

@@ -5,27 +5,38 @@
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    width: 50%; /* Full width */
+    width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
+    padding-top: 100px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .popup-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Optional: Align items vertically */
+    left: 0;
+    top: 0;
+    overflow: auto;
     /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
+    top: 20%;
+    left: 30%; */
+    /*transform: translate(-50%, -50%);*/
     background-color: rgb(0, 0, 58);
     border: 1px solid #1ae5ac;
     border-radius: 5px;
     padding: 20px;
+    width: 26rem;
 }
 
 .close {
-    position: absolute;
+    /*position: absolute;*/
+    justify-self: right;
     top: 10px;
     right: 15px;
     font-size: 20px;
@@ -36,8 +47,24 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #262787;
+    color: rgb(79, 0, 136);
+    font-size: 1.25rem;
+    display: inline-block;
+    text-decoration: none;
+    padding: 15px 20px;
+    margin: 0px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    border: none;
+    /*background-color: inherit;*/
+    background-color: inherit;
 }
+
+
+/* #loginButton:hover{
+    background-color: rgb(0, 0, 67);
+} */
 
 .animate {
     -webkit-animation: animatezoom 0.6s;
@@ -84,7 +111,7 @@ body {
 }
 
 /* Style the links inside the navigation bar */
-.navbar a {
+.navbar a{
     font-size: 1.25rem;
     display: inline-block;
     text-decoration: none;
@@ -93,6 +120,11 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+}
+
+.loginButton:hover {
+    background-color: rgb(25, 25, 140);
+    transform: scale(0.95);
 }
 
 /* transition: .3s;
@@ -175,4 +207,12 @@ header {
 .container {
     display: flex; /* Use flexbox layout */
     align-items: center; /* Align items vertically in the center */
+}
+
+.stop-button {
+    height: 20px; /* Set height */
+    border: none; /* Remove border */
+    cursor: pointer; /* Set cursor to pointer on hover */
+    margin-left: 3px;
+    margin-right: 3px;
 }

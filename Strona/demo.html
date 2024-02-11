@@ -5,22 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
-    <script src="/scripts/animations_new_2.js"></script>
     <link href="styles/main.css" rel="stylesheet" type="text/css"/>
-    <script src="scripts/animations_new_2.js"></script>
     <title>Fraktale</title>
 </head>
 
 <body>
     <div class="navbar">
-        <a href="https://ti-prj.vercel.app/login">Login</a>
+        <canvas id="myCanvas1" width="100" height="100"></canvas>
+        <a><button id="loginButton">Login</button></a>
         <a class="active" href="https://ti-prj.vercel.app/demo">Demo</a>
         <a href="https://ti-prj.vercel.app/info">Trójkąt Sierpińskiego</a>
         <a href="https://ti-prj.vercel.app/main_page">Strona główna</a>
       </div>
+      
+      <script src="/julia4.js"></script>
+      <script src="julia4.js"></script>
+
     <header>
         <h1>Fraktale Sierpińskiego</h1>
     </header>
+    
+    <div id="popup" class="popup">
+        <div id="animate">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2>Zaloguj się na konto</h2>
+                <form id="loginForm" action="https://ti-prj.vercel.app/login" method="post">
+                    <label for="username">Login:</label>
+                    <input type="text" id="username" name="username"><br><br>
+                    <label for="password">Hasło:</label>
+                    <input type="password" id="password" name="password"><br><br>
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;" id="panel"><button type="submit" style="margin-left: 5rem;">Zaloguj się</button></div>
+                </form>
+            </div>
+        </div>
+        </div>
     
     <div style="display: flex;">
         <div style="flex: 1;">
@@ -28,17 +47,42 @@
         </div>
         <div style="flex: 1;">
             <select id="choice">
-                <option value="">Choose an option...</option>
                 <option value="curve">Curve</option>
                 <option value="randomdot">RandomDot2</option>
                 <option value="pascal">Pascal</option>
+                <option value="square">Square</option>
             </select>
-            <label for="order">Stopień: 1</label><input type="range" min="1" max="7" name="order">
-            <label for="order">7</label> 
-            <br> <button onclick="animate_this()">Animacja</button> <button disabled="true">Zapisz w profilu</button>
-            <br> <section class="text-container">There will be explanation!</section>
+            <div class="controls-container" id="controls-container"></div>
+            <br> <div style="display:flex; align-items: center;"><button onclick="animate_this()">Animacja</button> <button class="stop-button" onclick="all_stop()">Zatrzymaj</button> <button disabled="true" onclick="SavePreference()">Zapisz w profilu</button></div>
+            <br> <section class="text-container" id="explanation-container">There will be explanation!</section>
         </div>
     </div>
+    
+    <script src="/scripts/animations_new_2.js"></script>
+    <script src="scripts/animations_new_2.js"></script>
+
+    <script>
+        setExplanation("curve");
+        const loginButton = document.getElementById('loginButton');
+        const popup = document.getElementById('popup');
+        const closeButton = document.querySelector('.close');
+        const loginForm = document.getElementById('loginForm');
+
+        loginButton.addEventListener('click', function() {
+            popup.style.display = 'flex';
+        });
+
+        closeButton.addEventListener('click', function() {
+            popup.style.display = 'none';
+        });
+
+        const choiceBox = document.getElementById('choice');
+
+        choiceBox.addEventListener('change', function(event) {
+            const choice = event.target.value;
+            setExplanation(choice);
+        });
+    </script>
 
 </body>
 

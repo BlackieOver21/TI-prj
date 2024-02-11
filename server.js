@@ -25,11 +25,11 @@ function authenticateTokenUser(req, res, next) {
     return res.status(401).send('Unauthorized: No token provided');
   }
 
-  jwt.verify(token, secretKey, (err, user) => {
+  jwt.verify(token, secretKey, (err, username) => {
     if (err) {
       return res.status(403).send('Forbidden: Invalid token');
     }
-    req.user = user;
+    req.username = username;
     next();
   });
 }
@@ -87,21 +87,18 @@ app.post('/login', (req, res) => {
   
     console.log('Received POST request data:', req.body);
 
-    var resp = logins.CheckPassword(data.login, data.pass);
+    var resp = logins.CheckPassword(data.username, data.password);
 
     resp.then(result => {
-        console.log('Query result:', result.rows);
-        if(result.rows[0].sprawdz_haslo != 0){
-            data['group'] = result.rows[0].sprawdz_haslo;
+        console.log('Query result:', result);
+        if(result){
             const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
             //storeSessionData(sessionToken, data);
             console.log(result.rows[0].sprawdz_haslo);
             res.cookie('sessionToken', sessionToken, { httpOnly: true });
             res.cookie('login', data.login, { maxAge: 900000, httpOnly: true });
             //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
-            if (result.rows[0].sprawdz_haslo == 1) res.redirect('/pacjent_loggedin');
-            if (result.rows[0].sprawdz_haslo == 2) res.redirect('/lekarz_loggedin');
-            if (result.rows[0].sprawdz_haslo >= 3) res.redirect('/pracownik_loggedin');
+            res.redirect('/main_page');
         } else {
             res.status(200).send('Request denied - password ' + data.pass + ' is incorrect.\n');
         }
@@ -120,7 +117,7 @@ app.post('/user_register', (req, res) => {
         console.log(result);
         if(result == 0){
           //res.status(200).send('Request completed - new user registered.\n');
-          res.redirect(302, 'http://pascal.fis.agh.edu.pl/~1bersutskyi/prj/login.html');
+          res.redirect(302, '/');
           //alert('Request completed - new user registered.\n');
         }else{
           //res.status(200).send('Request denied - nie udało się zarejestrować użytkownika.\n');
@@ -149,20 +146,21 @@ app.get('/fetching_terminy', authenticateTokenUser, (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  const htmlFilePath = path.join(__dirname, 'Strona', 'main.html');
-  fs.readFile(htmlFilePath, 'utf8', (err, data) => {
-    if (err) {
-        console.log(err);
-        // If an error occurs, send a 500 Internal Server Error response
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end('500 Internal Server Error');
-        return;
-    }
+//   const htmlFilePath = path.join(__dirname, 'Strona', 'main.html');
+//   fs.readFile(htmlFilePath, 'utf8', (err, data) => {
+//     if (err) {
+//         console.log(err);
+//         // If an error occurs, send a 500 Internal Server Error response
+//         res.writeHead(500, { 'Content-Type': 'text/plain' });
+//         res.end('500 Internal Server Error');
+//         return;
+//     }
 
-    // Send the HTML content as the response
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(data);
-});
+//     // Send the HTML content as the response
+//     res.writeHead(200, { 'Content-Type': 'text/html' });
+//     res.end(data);
+// });
+res.redirect('/main_page');
 });
 
 app.get('/main_page', (req, res) => {
@@ -219,7 +217,7 @@ app.post('/save_preference', authenticateTokenUser, (req, res) => {
   
   console.log('Received POST request data:', req.body);
 
-  logins.AddDiagnoza(data)
+  logins.AddPreference(data)
   .then(() => {
     console.log('Dodano diagnoze.');
 
@@ -230,7 +228,7 @@ app.post('/save_preference', authenticateTokenUser, (req, res) => {
 });
 
 const port =  process.env.PORT || 8080;
-const hostname = 'pascal.fis.agh.edu.pl';
+//const hostname = 'pascal.fis.agh.edu.pl';
 
 // Start the server
 app.listen(port, () => {
