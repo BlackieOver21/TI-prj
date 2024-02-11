@@ -531,7 +531,7 @@ function SavePreference(){
         if (!response.ok) {
         throw new Error('Network response was not ok');
         }
-        return response.json(); // Parse the JSON response
+        return response; // Parse the JSON response
     })
     .then(data => {
         console.log('Response:', data); // Handle the response data

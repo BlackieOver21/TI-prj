@@ -58,17 +58,21 @@ async function AddPreference(preference, username) {
       query = `UPDATE users
                     SET dot_x1 = $2, dot_x2 = $3, dot_x3 = $4, dot_y1 = $5, dot_y2 = $6, dot_y3 = $7
                     WHERE users.username = $1;`
-    } else if(preference.change == 'curve'){
+    }
+    if(preference.change == 'curve'){
       params = [username, preference.cl];
       query = `UPDATE users
                     SET curve_level = $2
                     WHERE users.username = $1;`
-    } else if(preference.change == 'pascal'){
+    }
+    if(preference.change == 'pascal'){
       params = [username, preference.pl];
       query = `UPDATE users
                     SET pascal_level = $2
                     WHERE users.username = $1;`
     }
+
+    console.log(query);
 
     client.query(query, params)
       .then((result) => {
@@ -77,6 +81,7 @@ async function AddPreference(preference, username) {
         console.log('Inserted row:', result.rows[0]);
 
         resolve(true); // You may want to return the inserted data or an indicator of success
+        return true;
       }).catch((error) => {
         console.error('Error executing query:', error);
         // Handle the error here
