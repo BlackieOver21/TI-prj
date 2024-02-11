@@ -53,9 +53,7 @@ app.post('/newuser', (req, res) => {
 
   var resp = logins.RegisterNewUser(data.username, data.password);
 
-  resp.then(result => {
-      console.log('Query result:', result);
-      if(result){
+  if(resp == 0){
           const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
           //storeSessionData(sessionToken, data);
           res.cookie('sessionToken', sessionToken, { httpOnly: true });
@@ -64,8 +62,7 @@ app.post('/newuser', (req, res) => {
           res.redirect('/main_page');
       } else {
           res.status(200).send('Request denied - password ' + data.password + ' is incorrect.\n');
-      }
-    })
+    }
 });
 
 app.post('/chkpwd', (req, res) => {
