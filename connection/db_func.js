@@ -1,14 +1,25 @@
 const client = require('./db_conn');
 
-async function addUser(username, email, password) {
+const { Pool } = require('pg');
+
+// Create a PostgreSQL pool
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+// Function to add a new user to the database
+async function addUser(username, password) {
   try {
     // Connect to the database pool
     const client = await pool.connect();
 
     // Insert the new user into the database
     const result = await client.query(
-      'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
-      [username, email, password]
+      'INSERT INTO users (username, email, password) VALUES ($1, $2) RETURNING *',
+      [username, password]
     );
 
     // Release the client back to the pool
@@ -22,6 +33,7 @@ async function addUser(username, email, password) {
     throw error;
   }
 }
+
 
 async function CheckPassword(login, haslo) {
   try {

@@ -45,24 +45,36 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'Strona')));
 
 // Define a route that handles POST requests
-app.post('/newuser', (req, res) => {
-  const data = req.body;
+// app.post('/newuser', (req, res) => {
+//   const data = req.body;
 
-  console.log('Received POST request data:', data);
-  console.log('Received POST request password and login:', data.username, data.password);
+//   console.log('Received POST request data:', data);
+//   console.log('Received POST request password and login:', data.username, data.password);
 
-  var resp = logins.RegisterNewUser(data.username, data.password);
+//   var resp = logins.RegisterNewUser(data.username, data.password);
 
-  if(resp == 0){
-          const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
-          //storeSessionData(sessionToken, data);
-          res.cookie('sessionToken', sessionToken, { httpOnly: true });
-          res.cookie('login', data.username, { maxAge: 900000, httpOnly: true });
-          //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
-          res.redirect('/main_page');
-      } else {
-          res.status(200).send('Request denied - password ' + data.password + ' is incorrect.\n');
-    }
+//   if(resp == 0){
+//           const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
+//           //storeSessionData(sessionToken, data);
+//           res.cookie('sessionToken', sessionToken, { httpOnly: true });
+//           res.cookie('login', data.username, { maxAge: 900000, httpOnly: true });
+//           //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
+//           res.redirect('/main_page');
+//       } else {
+//           res.status(200).send('Request denied - password ' + data.password + ' is incorrect.\n');
+//     }
+// });
+
+app.post('/newuser', async (req, res) => {
+  try {
+    const newUser = await addUser(req.body.username, req.body.password);
+    console.log('New user added:', newUser);
+  } catch (error) {
+    console.error('Error:', error.message);
+  } finally {
+    // Close the database pool when done
+    await pool.end();
+  }
 });
 
 
