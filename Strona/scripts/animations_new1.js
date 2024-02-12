@@ -491,7 +491,7 @@ function setExplanation(choice){
 }
 
 function SavePreference(){
-    const url = 'https://ti-prj.vercel.app/save_preference';
+    const url = 'https://ti-prj1.vercel.app/save_preference';
 
     
     x1 = document.getElementById('x1');
@@ -564,7 +564,7 @@ function existsCookie(cookieName) {
 }
 
 function logOut(){
-    // const url = 'https://ti-prj.vercel.app/logout';
+    // const url = 'https://ti-prj1.vercel.app/logout';
 
     // const postData = {};
 
@@ -608,7 +608,7 @@ function switch_reg(){
         <label for="password">Hasło:</label>\
         <input type="password" id="password" name="password"><br><br>\
         <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zarejestruj się</button></div>';
-        form.action = "https://ti-prj.vercel.app/newuser";
+        form.action = "https://ti-prj1.vercel.app/newuser";
     } else if (btn.innerText == 'R'){
         btn.innerText = 'L';
         form.innerHTML = '\
@@ -617,6 +617,6 @@ function switch_reg(){
         <label for="password">Hasło:</label>\
         <input type="password" id="password" name="password"><br><br>\
         <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zaloguj się</button></div>';
-        form.action = "https://ti-prj.vercel.app/login";
+        form.action = "https://ti-prj1.vercel.app/login";
     }
 }
