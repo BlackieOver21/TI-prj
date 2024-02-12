@@ -70,7 +70,7 @@
         console.log(existsCookie('sessionToken'));
         if(existsCookie('sessionToken')){
             const loginContainer = document.getElementById("login-container");
-            loginContainer.innerhtml = '<button id="logoutButton" class="loginButton" onclick="logOut()">Logout</button>';
+            loginContainer.innerHTML = '<button id="logoutButton" class="loginButton" onclick="logOut()">Logout</button>';
         } else {
             const loginButton = document.getElementById('loginButton');
             const popup = document.getElementById('popup');

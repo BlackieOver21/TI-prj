@@ -379,14 +379,18 @@ function update_this() {
     dot_stop = true;
     const choice = document.getElementById('choice').value;
     if (choice) {
-        var order = document.getElementById('order').value;
         console.log(order);
         switch (choice) {
             case "curve":
+                var order = document.getElementById('order_curve').value;
                 animateCurve(order, order-1);
                 break;
             case "randomdot":
                 animateRandomDot(order);
+                break;
+            case "pascal":
+                var order = document.getElementById('order_pascal').value;
+                animatePascal();
                 break;
             // Add more cases as needed
             default:
@@ -549,6 +553,7 @@ function existsCookie(cookieName) {
         var parts = cookies[i].split('=');
         var name = parts[0];
         var value = parts[1];
+	    console.log(cookieName, name);
         if (cookieName == name) {
             // Cookie found
             return true;
@@ -588,6 +593,8 @@ function logOut(){
 
     document.cookie = "sessionToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+	location.reload();
 }
 
 function switch_reg(){

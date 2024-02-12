@@ -68,7 +68,7 @@
         console.log(existsCookie('sessionToken'));
         if(existsCookie('sessionToken')){
             const loginContainer = document.getElementById("login-container");
-            loginContainer.innerhtml = '<button id="logoutButton" class="loginButton" onclick="logOut()">Logout</button>';
+            loginContainer.innerHTML = '<button id="logoutButton" class="loginButton" onclick="logOut()">Logout</button>';
             document.getElementById('preference-btn').disabled = false;
         } else {
             const loginButton = document.getElementById('loginButton');

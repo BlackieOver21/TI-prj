@@ -2,10 +2,10 @@ const { Client } = require('pg');
 
 // Connection information for your PostgreSQL database
 const connectionData = {
-  user: process.env.POSTGRES_USER,
-  host: process.env.POSTGRES_HOST,
-  database: process.env.POSTGRES_DATABASE,
-  password: process.env.POSTGRES_PASSWORD,
+  user: 'default',
+  host: 'ep-late-lab-a4bjepzz-pooler.us-east-1.aws.neon.tech',
+  database: 'verceldb',
+  password: 'c8qJe9lLXHfo',
   port: 5432, // Default PostgreSQL port
   ssl: {
     rejectUnauthorized: false, // Ignore self-signed certificates if necessary
