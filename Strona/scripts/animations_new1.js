@@ -526,7 +526,7 @@ function setExplanation(choice){
 }
 
 function SavePreference(){
-    const url = 'https://ti-prj.vercel.app//save_preference';
+    const url = 'https://ti-prj2.vercel.app/save_preference';
 
     
     x1 = document.getElementById('x1');
@@ -641,7 +641,7 @@ function switch_reg(){
         <label for="password">Hasło:</label>\
         <input type="password" id="password" name="password"><br><br>\
         <div style="display: flex; align-items: center; margin-bottom: 20px;" id="panel"><button type="submit" style="margin-left: 5rem;">Zarejestruj się</button></div>';
-        form.action = "https://ti-prj.vercel.app//newuser";
+        form.action = "https://ti-prj2.vercel.app/newuser";
     } else if (btn.innerText == 'Rejestracja'){
         btn.innerText = 'Logowanie';
         form.innerHTML = '\
@@ -650,12 +650,12 @@ function switch_reg(){
         <label for="password">Hasło:</label>\
         <input type="password" id="password" name="password"><br><br>\
         <div style="display: flex; align-items: center; margin-bottom: 20px;" id="panel"><button type="submit" style="margin-left: 5rem;">Zaloguj się</button></div>';
-        form.action = "https://ti-prj.vercel.app//login";
+        form.action = "https://ti-prj2.vercel.app/login";
     }
 }
 
 function load_pref(){
-    return fetch('https://ti-prj.vercel.app//fetch_preference')
+    return fetch('https://ti-prj2.vercel.app/fetch_preference')
         .then(response => response.json())
         .catch(error => {
         console.error('Error fetching data:', error);
