@@ -15,13 +15,15 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <canvas id="myCanvas1" width="100" height="100"></canvas>
-        <a style="padding: 0%;"><button id="loginButton">Login</button></a>
-        <a href="https://ti-prj1.vercel.app/demo">Demo</a>
-        <a class="active" href="https://ti-prj1.vercel.app/info">Trójkąt Sierpińskiego</a>
-        <a href="https://ti-prj1.vercel.app/main_page">Strona główna</a>
-      </div>
+    <div class="borders">
+        <div class="navbar">
+            <canvas id="myCanvas1" width="100" height="100"></canvas>
+            <a style="padding: 0%;"><div id="login-container"><button id="loginButton" class="loginButton">Login</button></div></a>
+            <a href="https://ti-prj.vercel.app//demo">Demo</a>
+            <a class="active" href="https://ti-prj.vercel.app//info">Trójkąt Sierpińskiego</a>
+            <a href="https://ti-prj.vercel.app//main_page">Strona główna</a>
+        </div>
+    </div>
 
       <script src="/julia4.js"></script>
       <script src="julia4.js"></script>
@@ -29,14 +31,14 @@
       <div id="popup" class="popup">
       <div id="animate">
           <div class="popup-content">
-            <button id="switch" onclick="switch_reg()">L</button><span class="close">&times;</span>
+            <button id="switch" onclick="switch_reg()">Logowanie</button><span class="close">&times;</span>
               <h2>Zaloguj się na konto</h2>
-              <form id="loginForm" action="https://ti-prj1.vercel.app/login" method="post">
+              <form id="loginForm" action="https://ti-prj.vercel.app//login" method="post">
                   <label for="username">Login:</label>
                   <input type="text" id="username" name="username"><br><br>
                   <label for="password">Hasło:</label>
                   <input type="password" id="password" name="password"><br><br>
-                  <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zaloguj się</button></div>
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;" id="panel"><button type="submit" style="margin-left: 5rem;">Zaloguj się</button></div>
               </form>
           </div>
       </div>
@@ -49,21 +51,61 @@
 
 
 
-    <section class="text-container">
-
-        <img class="image-2" style="width: 200px; height: 150px;" src="/res/dywan_sierpinskiego_trojkat.jpg" alt="Waclaw Sierpiński">
+    <section class="text-container-container">
+        <div class="text-container">
 
         <p>Trójkąt Sierpińskiego (znany też jako uszczelka Sierpińskiego) - jeden z najprostszych fraktali. 
-            Znany był na długo przed powstaniem tego pojęcia (patrz: Benoît Mandelbrot). 
-            Konstrukcja tego zbioru została podana przez polskiego matematyka Wacława Sierpińskiego w 1915 roku.
+            Znany był na długo przed powstaniem tego pojęcia. 
+            Konstrukcja tego zbioru została podana przez polskiego matematyka Wacława Sierpińskiego w 1915 roku.</p>
+            </div>
 
-        <p>Trójkąt Sierpińskiego otrzymuje się następująco: w trójkącie równobocznym łączy się środki boków, dzieląc go w ten sposób 
+        <div class="text-container-2">
+            <div style="align-items: center; flex-direction: column;">
+                <img class="image-1" style="width: 520px; height: 170px;" src="res/process.png" alt="dywan_sierpinskiego_trojkat">
+                <img class="image-1" style="width: 520px; height: 170px;" src="res/Sierpinski_triangle_evolution_square2.png" alt="dywan_sierpinskiego_trojkat">
+            </div>
+
+        <p style="font-size: 1.32rem;">Trójkąt Sierpińskiego otrzymuje się następująco: w trójkącie równobocznym łączy się środki boków, dzieląc go w ten sposób 
             na cztery mniejsze trójkąty. Trójkąt środkowy usuwa się (bez boków), a wobec trzech pozostałych trójkątów operację się powtarza, 
             dzieląc każdy z nich na cztery mniejsze trójkąty, usuwając środkowy (bez boków), a wobec pozostałych trójkątów czynności się powtarzają. 
             Po każdym powtórzeniu tej operacji z figury zostają usunięte pewne punkty. Punkty, które nie zostaną usunięte, tworzą trójkąt 
-            Sierpińskiego[.</p>
+            Sierpińskiego. Podobny proces możemy powtórzyć i dla kwardatów.
+            </p>
+        </div>
+
+        <div class="text-container">
+    
+            <p style="font-size: 1.32rem;">Trójkąt Sierpińskiego otrzymuje się następująco: w trójkącie równobocznym łączy się środki boków, dzieląc go w ten sposób 
+                na cztery mniejsze trójkąty. Trójkąt środkowy usuwa się (bez boków), a wobec trzech pozostałych trójkątów operację się powtarza, 
+                dzieląc każdy z nich na cztery mniejsze trójkąty, usuwając środkowy (bez boków), a wobec pozostałych trójkątów czynności się powtarzają. 
+                Po każdym powtórzeniu tej operacji z figury zostają usunięte pewne punkty. Punkty, które nie zostaną usunięte, tworzą trójkąt 
+                Sierpińskiego.
+                </p>
+
+                
+            <img class="image-2" style="width: 300px; height: 230px;" src="res/dywan_sierpinskiego_trojkat.jpg" alt="dywan_sierpinskiego">
+        </div>
+
+        <div class="text-container">
+            <img class="image-1" style="width: 300px; height: 270px;" src="res/hanoi.png" alt="hanoi_wieza">
+            <div style="flex-direction: column;">
+            <p style="font-size: 1.32rem; margin-bottom: 0px;">W teorii grafów i matematyce rekreacyjnej, grafy Hanoi to nieskierowane grafy, których wierzchołki reprezentują możliwe stany układanki Wieże Hanoi, a krawędzie reprezentują dozwolone ruchy między parami stanów. Jednak interesująca rzecz dzieje się, gdy ruchy prowadzące do rozwiązania łamigłówki Wieży Hanoi są przedstawione graficznie.</p>
+
+            <div class="text_container" style="display: flex; margin-left: 30px;">
+                <p style="font-size: 1.2rem; width: 400px;">Zaskakująco, trójkąty Sierpińskiego pojawiają się w wielu aspektach matematyki. Czasami są ukryte, dlatego przedstawiłem kilka sposobów na to, żeby je zobrazować.</p>
+
+                <img class="image-2" style="width: 200px; height: 100px; margin-top: 20px;" src="res/Arrowhead_curve_1_through_6.png" alt="arrowhead_curve">
+            </div>
+
+            </div>
+
+                
+        </div>
+
+        
 
     </section>
+    <div style="height: 5rem;"></div>
 
     <script>
         

@@ -1,15 +1,15 @@
 
 .popup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
     padding-top: 100px;
     justify-content: center;
     flex-wrap: wrap;
@@ -19,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Optional: Align items vertically */
+    flex-direction: column;
     left: 0;
     top: 0;
     overflow: auto;
@@ -41,6 +41,7 @@
     right: 15px;
     font-size: 20px;
     cursor: pointer;
+    margin-left: 20rem;
 }
 
 #loginButton {
@@ -81,8 +82,6 @@ from {transform: scale(0)}
 to {transform: scale(1)}
 }
 
-
-/* Reset some default styles */
 body, ul {
     margin: 0;
     padding: 0;
@@ -95,9 +94,9 @@ body, ul {
 body {
     margin-left: 13rem;
     margin-right: 13rem;
+    border: 2px solid #333; /* Adjust border width and color as needed */
 }
 
-/* Style the navigation bar */
 .navbar {
     background-color:  #00001d;;
     overflow: hidden;
@@ -107,10 +106,13 @@ body {
     flex-wrap: wrap;
     align-self: center;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    /* border: #262787;
+    border-width: 0px 1px 3px 1px;
+    border-style: solid; */
+    margin: 0px 5rem 0px 5rem;
 }
 
-/* Style the links inside the navigation bar */
 .navbar a{
     font-size: 1.25rem;
     display: inline-block;
@@ -133,26 +135,22 @@ transition-timing-function: ease;
 transition-delay: 0s;
 transition-property: all; */
 
-/* Change the color of links on hover */
 .navbar a:hover {
     background-color: rgb(0, 0, 67);
     transform: scale(0.95);
 }
 
-/* Style the active/current link */
 .navbar a.active {
     background-color: #262787;
     color:  rgb(40, 131, 243);
 }
 
 
-/* Reset some default styles */
 h1 {
     margin: 0;
     padding: 0;
 }
 
-/* Style the top bar */
 .topbar {
     background-color:  rgb(0, 0, 29);
     color: rgb(0, 0, 29);
@@ -166,32 +164,13 @@ h1 {
     z-index: 1000;
 }
 
-/* Style the text */
 .topbar h1 {
     font-size: 20px;
     margin: 0;
 }
 
-/* Change the background color on hover */
 .topbar:hover {
     background-color:  rgb(0, 0, 58);
-}
-
-.image-1 {
-    float: left; /* Float the image to the left */
-    margin-right: 20px; /* Add some space between the image and the text */
-    margin-bottom: 5px;
-}
-
-.image-2 {
-    float: right; /* Float the image to the left */
-    margin-left: 20px; /* Add some space between the image and the text */
-    margin-bottom: 5px;
-
-}
-
-.text-container {
-    overflow: hidden; /* Clear the float */
 }
 
 header {
@@ -205,14 +184,105 @@ header {
 }
 
 .container {
-    display: flex; /* Use flexbox layout */
-    align-items: center; /* Align items vertically in the center */
+    display: flex; 
+    align-items: center;
 }
 
 .stop-button {
-    height: 20px; /* Set height */
-    border: none; /* Remove border */
-    cursor: pointer; /* Set cursor to pointer on hover */
+    height: 20px;
+    border: none;
+    cursor: pointer; 
     margin-left: 3px;
     margin-right: 3px;
+}
+
+.text-container {
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: justify;
+  }
+  .text {
+    width: 60%; 
+  }
+  .image {
+    width: 40%; 
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .text, .image {
+      width: 100%;
+    }
+}
+
+.image-1 {
+    float: left;
+    margin-right: 20px; 
+    margin-bottom: 5px;
+    height: 300px;
+    width: 300px
+}
+
+.image-2 {
+    float: right;
+    margin-left: 20px; 
+    margin-bottom: 5px;
+    height: 400px;
+    width: 250px
+}
+
+.text-container-container{
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+.borders{
+    border: #333; 
+    border-width: 0px 0px 3px 0px; 
+    border-style: solid; 
+    margin-bottom: 20px;
+    padding: 0px 20px 0px 20px;
+}
+
+.text-container-1{
+    text-align: justify;
+}
+
+.ui-container{
+    flex: 1;
+    margin-right: 60px;
+}
+
+.canvas-container{
+    flex: 1; 
+    margin-left: 60px;
+}
+
+.text-container-2 {
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: justify;
+  }
+  .text {
+    width: 60%; 
+  }
+  .image {
+    width: 40%; 
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .text, .image {
+      width: 100%;
+    }
 }

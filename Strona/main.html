@@ -15,12 +15,14 @@
 </head>
 
 <body>
+    <div class="borders">
     <div class="navbar">
         <canvas id="myCanvas1" width="100" height="100"></canvas>
         <a style="padding: 0%;"><div id="login-container"><button id="loginButton" class="loginButton">Login</button></div></a>
-        <a href="https://ti-prj1.vercel.app/demo">Demo</a>
-        <a href="https://ti-prj1.vercel.app/info">Trójkąt Sierpińskiego</a>
-        <a class="active" href="https://ti-prj1.vercel.app/main_page">Strona główna</a>
+        <a href="https://ti-prj.vercel.app//demo">Demo</a>
+        <a href="https://ti-prj.vercel.app//info">Trójkąt Sierpińskiego</a>
+        <a class="active" href="https://ti-prj.vercel.app//main_page">Strona główna</a>
+      </div>
       </div>
 
 
@@ -36,37 +38,52 @@
     <div id="popup" class="popup">
     <div id="animate">
         <div class="popup-content">
-            <button id="switch" onclick="switch_reg()">L</button><span class="close">&times;</span>
+            <div style="flex-direction: row;"><button id="switch" onclick="switch_reg()">Logowanie</button><span class="close">&times;</span></div>
             <h2>Zaloguj się na konto</h2>
-            <form id="loginForm" action="https://ti-prj1.vercel.app/login" method="post">
+            <form id="loginForm" action="https://ti-prj.vercel.app//login" method="post">
                 <label for="username">Login:</label>
                 <input type="text" id="username" name="username"><br><br>
                 <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password"><br><br>
-                <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zaloguj się</button></div>
+                <div style="display: flex; align-items: center; margin-bottom: 20px;" id="panel"><button type="submit" style="margin-left: 5rem;">Zaloguj się</button></div>
             </form>
         </div>
     </div>
     </div>
     
-
-    <section class="text-container">
-
-        <img class="image-2" src="/res/waclaw_sierpinski.jpg" alt="Waclaw Sierpiński">
-
-        <p>Wacław Franciszek Sierpiński (1882-1969) urodził się 14 marca 1882 w rodzinie Konstantego, lekarza, i Ludwiki z Łapińskich. 
-            W 1900 ukończył V Gimnazjum Klasyczne w Warszawie i rozpoczął studia na Wydziale Fizyko-Matematycznym Cesarskiego Uniwersytetu 
-            Warszawskiego. Studia ukończył w roku 1904, uzyskując stopień kandydata nauk i złoty medal za pracę z teorii liczb.</p>
-
-        <p>Profesor Sierpiński był jednym z największych polskich matematyków, twórcą tak zwanej warszawskiej szkoły matematycznej, 
-        skupiającej najwybitniejszych specjalistów od analizy, logiki, teorii mnogości i topologii, którzy działali w naszym kraju 
-        w okresie międzywojennym (1915-1939). Sam Profesor specjalizował się w teorii zbiorów i topologii. </p>
+    <section class="text-container-container">
+        <div class="text-container">
             
-        <p>Szerokiej matematycznej społeczności Profesor Sierpiński kojarzy się przede wszystkim z… dywanami. </p>
-            
-        <p>Nie takimi, które układa się na podłodze, ale dywanami matematycznymi, które konstruuje się w pewien szczególny sposób.</p>
+            <div class="text">
+                <p>Wacław Franciszek Sierpiński (1882-1969) urodził się 14 marca 1882 w rodzinie Konstantego, lekarza, i Ludwiki z Łapińskich. 
+                    W 1900 ukończył V Gimnazjum Klasyczne w Warszawie i rozpoczął studia na Wydziale Fizyko-Matematycznym Cesarskiego Uniwersytetu 
+                    Warszawskiego. Studia ukończył w roku 1904, uzyskując stopień kandydata nauk i złoty medal za pracę z teorii liczb.</p>
+
+                <p>Profesor Sierpiński był jednym z największych polskich matematyków, twórcą tak zwanej warszawskiej szkoły matematycznej, 
+                    skupiającej najwybitniejszych specjalistów od analizy, logiki, teorii mnogości i topologii, którzy działali w naszym kraju 
+                    w okresie międzywojennym (1915-1939). Sam Profesor specjalizował się w teorii zbiorów i topologii. </p>
+            </div>
+
+            <div class="image"><img class="image-2" src="res/waclaw_sierpinski.jpg" alt="Waclaw Sierpiński"></div>
+        </div>
+        <div class="text-container">
+
+            <div class="image"><img class="image-1" src="res/dywan_sierpinskiego.jpg" alt="Waclaw Sierpiński"></div>
+
+            <div class="text">
+                <p style="font-size: 1.32rem;">Szerokiej matematycznej społeczności Profesor Sierpiński kojarzy się przede wszystkim z… dywanami. 
+                    Nie takimi, które układa się na podłodze, ale dywanami matematycznymi, które konstruuje się w pewien szczególny sposób:</p>
+        
+                <p style="font-size: 1.32rem;">Rozpocznijmy od dwóch podstawowych kształtów: kwadratu i trójkąta równobocznego. Następnie podzielmy każdą z tych figur na równą 
+                    liczbę części: kwadrat na 9 mniejszych kwadratów, a trójkąt na 4 mniejsze trójkąty równoboczne. Po usunięciu środkowego 
+                    fragmentu z każdej z tych podzielonych figur, pozostałe części ponownie podzielmy na mniejsze fragmenty, a następnie usuńmy środek. 
+                    Kontynuując ten proces w nieskończoność, otrzymamy interesujące wzory i kształty.</p>
+            </div>
+
+        </div>
 
     </section>
+    <div style="height: 5rem;"></div>
 
     <script>
 	    const exists = existsCookie('sessionToken');

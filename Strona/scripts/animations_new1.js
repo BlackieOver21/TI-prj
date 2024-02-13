@@ -26,13 +26,22 @@ function animateCurve(order, iterations_start){
     dot_stop = true;
     curve_stop = false;
 
-    let iterations = iterations_start || 0; // Start with 0 iterations
-    const maxIterations = order || 10; // Maximum number of iterations
-    const animationSpeed = 300; // Animation speed in milliseconds
+    let iterations = iterations_start || 0;
+    const maxIterations = order || 10;
+    const animationSpeed = 300; // milliseconds
 
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, width, height);
     ctx.fillStyle = 'black';
+
+    function draw_lvl1(x1, y1, x2, y2, x3, y3, x4, y4){
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineTo(x3, y3);
+        ctx.lineTo(x4, y4);
+        ctx.stroke();
+    }
 
     function drawGasketCurve(x1, y1, x2, y2, x3, y3, x4, y4, level, iter, ratio) {
         if (level === 0) {
@@ -155,7 +164,12 @@ function animateCurve(order, iterations_start){
         const x4 = x1+side;
         const y4 = y1;
 
-        drawGasketCurve(x1, y1, x2, y2, x3, y3, x4, y4, iterations, 0, 1);
+        if(iterations > 0){
+            drawGasketCurve(x1, y1, x2, y2, x3, y3, x4, y4, iterations, 0, 1);
+        }else{
+            draw_lvl1(x1, y1, x2, y2, x3, y3, x4, y4);
+        }
+
         if (iterations < maxIterations) {
             timeoutId = setTimeout(animate, animationSpeed);
             iterations++;
@@ -178,7 +192,7 @@ function animateCurve(order, iterations_start){
         // probably also want a ctx.closePath(), check later
     }
 
-    ctx.clearRect(0, 0, width, height);
+    //ctx.clearRect(0, 0, width, height);
     const side = 300;
     const x1 = 50;
     const y1 = height - 50;
@@ -214,11 +228,17 @@ function animateRandomDot(order) {
     curve_stop = true;
     clearTimeout(timeoutId);
 
-        const triangleVertices = [
-        { x: width / 2, y: 100 }, // Vertex 1
-        { x: 50, y: height - 50 }, // Vertex 2
-        { x: width - 50, y: height - 50 } // Vertex 3
+    const triangleVertices = [
+        { x: document.getElementById('x1').value, y: document.getElementById('y1').value }, // Vertex 1
+        { x: document.getElementById('x2').value, y: document.getElementById('y2').value }, // Vertex 2
+        { x: document.getElementById('x3').value, y: document.getElementById('y3').value } // Vertex 3
     ];
+
+    // const triangleVertices = [
+    //     { x: 225, y: 100 }, // Vertex 1
+    //     { x: 50, y: 400 }, // Vertex 2
+    //     { x: 400, y: 400 } // Vertex 3
+    // ];
 
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, width, height);
@@ -239,17 +259,17 @@ function animateRandomDot(order) {
         return point;
     }
 
-    const animationSpeed = 0.0001; // Adjust as needed
+    const animationSpeed = 0.0001;
     let currentPosition = getRandomPointInTriangle();
     console.log(animationSpeed);
 
     function animateRandomWalk() {
-        const randomVertexIndex = Math.floor(Math.random() * 3); // Randomly select a vertex
+        const randomVertexIndex = Math.floor(Math.random() * 3); 
         const selectedVertex = triangleVertices[randomVertexIndex];
         currentPosition.x += (selectedVertex.x - currentPosition.x) / 2;
         currentPosition.y += (selectedVertex.y - currentPosition.y) / 2;
 
-        ctx.fillRect(currentPosition.x, currentPosition.y, 2, 2); // Plot the current position
+        ctx.fillRect(currentPosition.x, currentPosition.y, 2, 2); 
 
         timeoutId = setTimeout(animateRandomWalk, animationSpeed);
         // if (dot_stop) {
@@ -289,9 +309,9 @@ function animateRandomDot(order) {
 
 function animatePascal(){
     clearTimeout(timeoutId);
-    const numRows = 1; // Number of rows in Pascal's triangle
-        //const cellSize = 20; // Size of each cell
-        const delay = 100; // Delay between frames (in milliseconds)
+    const numRows = 1;
+        //const cellSize = 20;
+        const delay = 100; // milliseconds
 
         let triangle = generatePascalsTriangle(numRows);
 
@@ -330,8 +350,7 @@ function animatePascal(){
                     ctx.fillStyle = color;
                     ctx.fillRect(j * cellSize + (middle_x - ((i+1)/2)*cellSize), i * cellSize + 100, cellSize, cellSize);
         
-                    // Draw text representing the value of the number
-                    ctx.fillStyle = color === 'white' ? 'black' : 'white'; // Invert text color for better contrast
+                    ctx.fillStyle = color === 'white' ? 'black' : 'white';
                     ctx.font = (1 + myabs(20 - triangle.length)) + 'px Arial';
                     if(row[j] < BigInt(100000)) ctx.fillText(row[j], j * cellSize + cellSize / 2 - 5 + (middle_x - ((i+1)/2)*cellSize), i * cellSize + cellSize / 2 + 5 + 100);
                 }
@@ -339,7 +358,7 @@ function animatePascal(){
         }
 
         function animate() {
-            // Generate the next row of Pascal's triangle
+            // Generate next row of Pascal's triangle
             triangle.push([]);
             const newRow = triangle[triangle.length - 2];
             for (let i = 0; i < newRow.length + 1; i++) {
@@ -349,11 +368,9 @@ function animatePascal(){
 
             drawTriangle();
 
-            // Repeat the animation
             timeoutId = setTimeout(animate, delay);
         }
 
-        // Start the animation
         animate();
 }
 
@@ -392,9 +409,8 @@ function update_this() {
                 var order = document.getElementById('order_pascal').value;
                 animatePascal();
                 break;
-            // Add more cases as needed
             default:
-                // code to execute if expression doesn't match any case
+                break;
         }
     } else {
     }
@@ -415,7 +431,7 @@ function animate_this() {
                 animatePascal();
                 break;
             default:
-                // code to execute if expression doesn't match any case
+                break;
         }
     } else {
     }
@@ -424,6 +440,24 @@ function animate_this() {
 function setExplanation(choice){
     textbox = document.getElementById("explanation-container");
     controls = document.getElementById("controls-container");
+    load_pref()
+    .then(result => {
+    var val = result;
+    console.log(val);
+
+
+    if(!val){
+        val = {
+            dot_x1: 225,
+            dot_x2: 50,
+            dot_x3: 400,
+            dot_y1: 100,
+            dot_y2: 400,
+            dot_y3: 400,
+            curve_level: 5,
+            pascal_level: 5
+        }
+    }
     if (choice) {
         switch (choice) {
             case "curve":
@@ -432,8 +466,8 @@ function setExplanation(choice){
                      - Wielokrotnie zamieńmy każdy odcinek krzywej na trzy krótsze odcinki, tworząc kąty 120° na każdym skrzyżowaniu \
                 dwóch kolejnych segmentów, przy czym pierwszy i ostatni segment krzywej są albo równoległe do pierwotnego odcinka linii, albo \
                 tworzą z nim kąt 60°.` ;
-                controls.innerHTML = '<label for="order">Stopień: 1</label><input type="range" min="0" max="10" id="order_curve" name="order" \
-                onchange="update_this()"><label for="order">7</label> ';
+                controls.innerHTML = '<label for="order">Poziom: 1</label><input type="range" min="0" max="9" value="'+ val.curve_level +'" id="order_curve" name="order" \
+                onchange="update_this()"><label for="order">10</label> ';
                 break;
             case "randomdot":
                 textbox.innerText = `Ten algorytm nazywa się również Grą w Chaos:
@@ -448,14 +482,14 @@ function setExplanation(choice){
                 ale nie do trójkąta Sierpińskiego, to żaden punkt Dn do tego trójkąta nie należy, jednak otrzymujemy ten trójkąt \
                 jako zbiór punktów skupienia ciągu (D0, D1,...).` ;
                 controls.innerHTML = '\
-                <label for="x1">x1:</label><input pattern="[0-9]*" type="text" id="x1" name="x1" value="225">\
-                <label for="y1">y1:</label><input pattern="[0-9]*" type="text" id="y1" name="y1" value="100">\
+                <label for="x1">x1:</label><input pattern="[0-9]*" type="text" id="x1" name="x1" value="'+ val.dot_x1 +'">\
+                <label for="y1">y1:</label><input pattern="[0-9]*" type="text" id="y1" name="y1" value="'+ val.dot_y1 +'">\
                 <br>\
-                <label for="x2">x2:</label><input pattern="[0-9]*" type="text" id="x2" name="x2" value="50">\
-                <label for="y2">y2:</label><input pattern="[0-9]*" type="text" id="y2" name="y2" value="400">\
+                <label for="x2">x2:</label><input pattern="[0-9]*" type="text" id="x2" name="x2" value="'+ val.dot_x2 +'">\
+                <label for="y2">y2:</label><input pattern="[0-9]*" type="text" id="y2" name="y2" value="'+ val.dot_y2 +'">\
                 <br>\
-                <label for="x3">x3:</label><input pattern="[0-9]*" type="text" id="x3" name="x3" value="400">\
-                <label for="y3">y3:</label><input pattern="[0-9]*" type="text" id="y3" name="y3" value="400">\
+                <label for="x3">x3:</label><input pattern="[0-9]*" type="text" id="x3" name="x3" value="'+ val.dot_x3 +'">\
+                <label for="y3">y3:</label><input pattern="[0-9]*" type="text" id="y3" name="y3" value="'+ val.dot_y3 +'">\
                 <br>';
                 const inputs = document.querySelectorAll('input[type="text"]');
                 inputs.forEach(input => {
@@ -479,24 +513,25 @@ function setExplanation(choice){
                 2^n -rzędnego Trójkąt Pascala jest trójkątem Sierpińskiego, a ponieważ proporcja liczb \
                 czarnych dąży do zera wraz ze wzrostem n, wynika z tego, że \
                 proporcja współczynników nieparzystych do parzystych dąży do zera, gdy n dąży do nieskończoności.` ;
-                controls.innerHTML = '<label for="order">Stopień: 1</label><input type="range" min="0" max="10" id="order_pascal" name="order" \
-                onchange="update_this()"><label for="order">7</label> ';
+                // controls.innerHTML = '<label for="order">Stopień: 1</label><input type="range" min="1" max="10" value="'+ val.pascal_level +'" id="order_pascal" name="order" \
+                // onchange="update_this()"><label for="order">10</label> ';
+                controls.innerHTML = '';
                 break;
             default:
-                // code to execute if expression doesn't match any case
+                break;
         }
     } else {
     }
-
+});
 }
 
 function SavePreference(){
-    const url = 'https://ti-prj1.vercel.app/save_preference';
+    const url = 'https://ti-prj.vercel.app//save_preference';
 
     
     x1 = document.getElementById('x1');
     cl = document.getElementById('order_curve');
-    pl = document.getElementById('pascal_curve');
+    pl = document.getElementById('order_pascal');
     var postData = {};
 
     if(x1){
@@ -529,16 +564,15 @@ function SavePreference(){
     body: JSON.stringify(postData),
     };
 
-    // Send the POST request using fetch
     fetch(url, options)
     .then(response => {
         if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok, and neither am I');
         }
-        return response; // Parse the JSON response
+        return response;
     })
     .then(data => {
-        console.log('Response:', data); // Handle the response data
+        console.log('Response:', data); 
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -546,7 +580,6 @@ function SavePreference(){
 }
 
 function existsCookie(cookieName) {
-    // Get all cookies
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
         console.log(cookies[i]);
@@ -582,10 +615,10 @@ function logOut(){
     //     if (!response.ok) {
     //     throw new Error('Network response was not ok');
     //     }
-    //     return response.json(); // Parse the JSON response
+    //     return response.json();
     // })
     // .then(data => {
-    //     console.log('Response:', data); // Handle the response data
+    //     console.log('Response:', data);
     // })
     // .catch(error => {
     //     console.error('There was a problem with the fetch operation:', error);
@@ -600,23 +633,32 @@ function logOut(){
 function switch_reg(){
     form = document.getElementById("loginForm");
     btn = document.getElementById("switch");
-    if(btn.innerText == 'L'){
-        btn.innerText = 'R';
+    if(btn.innerText == 'Logowanie'){
+        btn.innerText = 'Rejestracja';
         form.innerHTML = '\
         <label for="username">Login:</label>\
         <input type="text" id="username" name="username"><br><br>\
         <label for="password">Hasło:</label>\
         <input type="password" id="password" name="password"><br><br>\
-        <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zarejestruj się</button></div>';
-        form.action = "https://ti-prj1.vercel.app/newuser";
-    } else if (btn.innerText == 'R'){
-        btn.innerText = 'L';
+        <div style="display: flex; align-items: center; margin-bottom: 20px;" id="panel"><button type="submit" style="margin-left: 5rem;">Zarejestruj się</button></div>';
+        form.action = "https://ti-prj.vercel.app//newuser";
+    } else if (btn.innerText == 'Rejestracja'){
+        btn.innerText = 'Logowanie';
         form.innerHTML = '\
         <label for="username">Login:</label>\
         <input type="text" id="username" name="username"><br><br>\
         <label for="password">Hasło:</label>\
         <input type="password" id="password" name="password"><br><br>\
-        <div style="display: flex; align-items: center; margin-bottom: 20px;"><button type="submit">Zaloguj się</button></div>';
-        form.action = "https://ti-prj1.vercel.app/login";
+        <div style="display: flex; align-items: center; margin-bottom: 20px;" id="panel"><button type="submit" style="margin-left: 5rem;">Zaloguj się</button></div>';
+        form.action = "https://ti-prj.vercel.app//login";
     }
+}
+
+function load_pref(){
+    return fetch('https://ti-prj.vercel.app//fetch_preference')
+        .then(response => response.json())
+        .catch(error => {
+        console.error('Error fetching data:', error);
+        return null;
+        });
 }

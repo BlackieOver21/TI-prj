@@ -42,7 +42,46 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'Strona')));
+app.use(express.static(path.join(__dirname, 'Strona/')));
+
+// app.post('/newuser', async (req, res) => {
+//   try {
+//     const newUser = await addUser(req.body.username, req.body.password);
+//     console.log('New user added:', newUser);
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//   } finally {
+//     // Close the database pool when done
+//     await pool.end();
+//   }
+// });
+
+// app.post('/chkpwd', (req, res) => {
+//     const data = req.body;
+  
+//     console.log('Received POST request data:', data);
+
+//     var resp = logins.CheckPassword(data.login, data.pass);
+
+//     resp.then(result => {
+//         console.log('Query result:', result.rows);
+//         res.status(200).send('POST request received successfully\n' + result.rows);
+//       })
+// });
+
+// app.post('/chgpwd', (req, res) => {
+//     const data = req.body;
+  
+//     console.log('Received POST request data:', data);
+
+//     var resp = logins.ChangePassword(data.login, data.pass1, data.pass2);
+
+//     resp.then(result => {
+//         console.log('Query result:', result.rows);
+//         res.status(200).send('POST request received successfully\n' + result.rows);
+//       })
+// });
+
 
 // Define a route that handles POST requests
 app.post('/newuser', (req, res) => {
@@ -57,51 +96,12 @@ app.post('/newuser', (req, res) => {
           const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
           //storeSessionData(sessionToken, data);
           res.cookie('sessionToken', sessionToken, { httpOnly: true });
-          res.cookie('login', data.username, { maxAge: 900000, httpOnly: true });
+          res.cookie('login', data.username, { httpOnly: true });
           //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
           res.redirect('/main_page');
       } else {
           res.status(200).send('Request denied - password ' + data.password + ' is incorrect.\n');
     }
-});
-
-// app.post('/newuser', async (req, res) => {
-//   try {
-//     const newUser = await addUser(req.body.username, req.body.password);
-//     console.log('New user added:', newUser);
-//   } catch (error) {
-//     console.error('Error:', error.message);
-//   } finally {
-//     // Close the database pool when done
-//     await pool.end();
-//   }
-// });
-
-
-app.post('/chkpwd', (req, res) => {
-    const data = req.body;
-  
-    console.log('Received POST request data:', data);
-
-    var resp = logins.CheckPassword(data.login, data.pass);
-
-    resp.then(result => {
-        console.log('Query result:', result.rows);
-        res.status(200).send('POST request received successfully\n' + result.rows);
-      })
-});
-
-app.post('/chgpwd', (req, res) => {
-    const data = req.body;
-  
-    console.log('Received POST request data:', data);
-
-    var resp = logins.ChangePassword(data.login, data.pass1, data.pass2);
-
-    resp.then(result => {
-        console.log('Query result:', result.rows);
-        res.status(200).send('POST request received successfully\n' + result.rows);
-      })
 });
 
 app.post('/login', (req, res) => {
@@ -118,7 +118,7 @@ app.post('/login', (req, res) => {
             const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
             //storeSessionData(sessionToken, data);
             res.cookie('sessionToken', sessionToken, { httpOnly: false });
-            res.cookie('login', data.username, { maxAge: 900000, httpOnly: false });
+            res.cookie('login', data.username, { httpOnly: false });
             //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
             res.redirect('/main_page');
         } else {
@@ -127,77 +127,63 @@ app.post('/login', (req, res) => {
       })
 });
 
-app.post('/logout', (req, res) => {
-  const data = req.body;
+// app.post('/logout', (req, res) => {
+//   const data = req.body;
 
-  console.log('Received POST request LOGOUT data:', data);
+//   console.log('Received POST request LOGOUT data:', data);
 
-  var resp = logins.CheckPassword(data.username, data.password);
+//   var resp = logins.CheckPassword(data.username, data.password);
 
-  const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
-  //storeSessionData(sessionToken, data);
-  res.cookie('sessionToken', sessionToken, { httpOnly: false });
-  res.cookie('login', data.username, { maxAge: 900000, httpOnly: false });
-  //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
-  res.redirect('/main_page');
-});
+//   const sessionToken = jwt.sign(data, secretKey, { expiresIn: '1h' });
+//   //storeSessionData(sessionToken, data);
+//   res.cookie('sessionToken', sessionToken, { httpOnly: false });
+//   res.cookie('login', data.username, { maxAge: 900000, httpOnly: false });
+//   //res.status(200).send('Request completed - logged in as ' + data.login + '.\n');
+//   res.redirect('/main_page');
+// });
 
-app.post('/user_register', (req, res) => {
-  const data = req.body;
+// app.post('/user_register', (req, res) => {
+//   const data = req.body;
 
-  console.log('Received POST request data:', data);
+//   console.log('Received POST request data:', data);
 
-  //var resp = logins.RegisterNewUser(data);
+//   //var resp = logins.RegisterNewUser(data);
 
-  logins.RegisterNewUser(data)
-      .then((result) => {
-        console.log(result);
-        if(result == 0){
-          //res.status(200).send('Request completed - new user registered.\n');
-          res.redirect(302, '/');
-          //alert('Request completed - new user registered.\n');
-        }else{
-          //res.status(200).send('Request denied - nie udało się zarejestrować użytkownika.\n');
-          res.redirect(302, 'http://pascal.fis.agh.edu.pl/~1bersutskyi/prj/login.html');
-          //alert('Request denied - nie udało się zarejestrować użytkownika.\n');
-          //res.json({'result':'1'});
-        }
-      });
-});
+//   logins.RegisterNewUser(data)
+//       .then((result) => {
+//         console.log(result);
+//         if(result == 0){
+//           //res.status(200).send('Request completed - new user registered.\n');
+//           res.redirect(302, '/');
+//           //alert('Request completed - new user registered.\n');
+//         }else{
+//           //res.status(200).send('Request denied - nie udało się zarejestrować użytkownika.\n');
+//           res.redirect(302, 'http://pascal.fis.agh.edu.pl/~1bersutskyi/prj/login.html');
+//           //alert('Request denied - nie udało się zarejestrować użytkownika.\n');
+//           //res.json({'result':'1'});
+//         }
+//       });
+// });
 
-app.get('/fetching_terminy', authenticateTokenUser, (req, res) => {
-  const parsedUrl = url.parse(req.url);
-  console.log(parsedUrl);
-  const queryString = querystring.parse(parsedUrl.query);
-  console.log(queryString);
-  const param1 = queryString.lekarz_id;
-  const param2 = queryString.dzien;
-  console.log(param1, param2);
-  logins.fetchAllTerminy(param1, param2)
-  .then(to_list => {
+// app.get('/fetching_terminy', authenticateTokenUser, (req, res) => {
+//   const parsedUrl = url.parse(req.url);
+//   console.log(parsedUrl);
+//   const queryString = querystring.parse(parsedUrl.query);
+//   console.log(queryString);
+//   const param1 = queryString.lekarz_id;
+//   const param2 = queryString.dzien;
+//   console.log(param1, param2);
+//   logins.fetchAllTerminy(param1, param2)
+//   .then(to_list => {
 
-    //console.log(to_list);
+//     //console.log(to_list);
 
-    res.setHeader('Content-Type', 'application/json').json(to_list);
-  });
-});
+//     res.setHeader('Content-Type', 'application/json').json(to_list);
+//   });
+// });
 
 app.get('/', (req, res) => {
-//   const htmlFilePath = path.join(__dirname, 'Strona', 'main.html');
-//   fs.readFile(htmlFilePath, 'utf8', (err, data) => {
-//     if (err) {
-//         console.log(err);
-//         // If an error occurs, send a 500 Internal Server Error response
-//         res.writeHead(500, { 'Content-Type': 'text/plain' });
-//         res.end('500 Internal Server Error');
-//         return;
-//     }
-
-//     // Send the HTML content as the response
-//     res.writeHead(200, { 'Content-Type': 'text/html' });
-//     res.end(data);
-// });
-res.redirect('/main_page');
+  res.redirect('/main_page');
 });
 
 app.get('/main_page', (req, res) => {
@@ -205,13 +191,11 @@ app.get('/main_page', (req, res) => {
   fs.readFile(htmlFilePath, 'utf8', (err, data) => {
     if (err) {
         console.log(err);
-        // If an error occurs, send a 500 Internal Server Error response
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('500 Internal Server Error');
         return;
     }
 
-    // Send the HTML content as the response
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(data);
 });
@@ -221,13 +205,11 @@ app.get('/info', (req, res) => {
   const htmlFilePath = path.join(__dirname, 'Strona', 'trojkat.html');
   fs.readFile(htmlFilePath, 'utf8', (err, data) => {
     if (err) {
-        // If an error occurs, send a 500 Internal Server Error response
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('500 Internal Server Error');
         return;
     }
 
-    // Send the HTML content as the response
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(data);
 });
@@ -237,13 +219,11 @@ app.get('/demo', (req, res) => {
   const htmlFilePath = path.join(__dirname, 'Strona', 'demo.html');
   fs.readFile(htmlFilePath, 'utf8', (err, data) => {
     if (err) {
-        // If an error occurs, send a 500 Internal Server Error response
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('500 Internal Server Error');
         return;
     }
 
-    // Send the HTML content as the response
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(data);
 });
@@ -261,6 +241,17 @@ app.post('/save_preference', authenticateTokenUser, (req, res) => {
    })
   .catch(err => {
     console.error('Error ', err);
+  });
+});
+
+app.get('/fetch_preference', authenticateTokenUser, (req, res) => {
+  logins.GetPreference(req.cookies.login)
+  .then(result => {
+    console.log('Pobrano preferencje.', result);
+    res.setHeader('Content-Type', 'application/json').json(result[0]);
+  })
+  .catch(err => {
+    console.log(err);
   });
 });
 
